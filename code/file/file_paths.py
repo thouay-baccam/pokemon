@@ -1,3 +1,5 @@
+import os
+
 class FilePaths:
     
     def __init__(self):
@@ -22,5 +24,8 @@ class FilePaths:
         self.pokemon_path = "code/personnage/pokemon.py"
         self.starter_pokeball_path = "code/personnage/starter_pokeball.py"
         self.trainer_path = "code/personnage/trainer.py"
+
+        self.pkmnsprites_path = os.path.join("img", "pkmnsprites")
+        self.img_path = os.path.join ("img")
 
 file_paths = FilePaths()
