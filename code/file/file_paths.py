@@ -43,3 +43,8 @@ pokemon_path = os.path.join(personnage_directory, "pokemon.py")
 # REPERTOIRE CONTENANT IMAGES
 img_path = os.path.join(pokemon_directory, "img")
 pkmnsprites_path = os.path.join(img_path, "pkmnsprites")
+
+def select_sprites(image):
+    if not isinstance(image, str):
+        raise ValueError("Le nom du fichier doit être un string")
+    return os.path.join(pkmnsprites_path, image)

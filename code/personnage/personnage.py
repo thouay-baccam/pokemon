@@ -4,7 +4,9 @@ class Personnage:
             raise ValueError("Le nom doit être un string")
         if not isinstance(gender, str):
             raise ValueError("Le genre doit être un string")
-        if not isinstance(overworld_sprite, str) or not isinstance(battle_sprite, str):
+        if not isinstance(overworld_sprite, str) and overworld_sprite is not None:
+            raise ValueError("Le chemin vers les sprites doivent être des strings")
+        if not isinstance(battle_sprite, str) and battle_sprite is not None:
             raise ValueError("Le chemin vers les sprites doivent être des strings")
         if not isinstance(x_pos, int) or not isinstance(y_pos, int):
             raise ValueError("Les coordonnées doivent être des integers.")
