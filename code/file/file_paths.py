@@ -1,31 +1,45 @@
 import os
 
-class FilePaths:
-    
-    def __init__(self):
-        self.save_game_path = "code/file/save_game.py"
-        self.file_paths_path = "code/file/file_paths.py"
 
-        self.combat_path = "code/gameplay/combat.py"
-        self.map_path = "code/gameplay/map.py"
-        self.mouvement_path = "code/gameplay/mouvement.py"
-        self.rencontre_sauvage_path = "code/gameplay/rencontre_sauvage.py"
+# REPERTOIRE PRINCIPAL
+pokemon_directory = os.path.abspath(
+    os.path.join(__file__, os.pardir, os.pardir, os.pardir)
+)
 
-        self.menu_pause_path = "code/menu/menu_pause.py"
-        self.menu_principal_path = "code/menu/menu_principal.py"
-        self.nouvelle_partie_path = "code/menu/nouvelle_partie.py"
-        self.pokedex_path = "code/menu/pokedex.py"
 
-        self.joueur_path = "code/personnage/joueur.py"
-        self.personnage_path = "code/personnage/personnage.py"
-        self.pnj_path = "code/personnage/pnj.py"
-        self.pokecenter_path = "code/personnage/pokecenter.py"
-        self.pokemart_path = "code/personnage/pokemart.py"
-        self.pokemon_path = "code/personnage/pokemon.py"
-        self.starter_pokeball_path = "code/personnage/starter_pokeball.py"
-        self.trainer_path = "code/personnage/trainer.py"
+# REPERTOIRE CONTENANT LE CODE
+code_directory = os.path.join(pokemon_directory, "code")
 
-        self.pkmnsprites_path = os.path.join("img", "pkmnsprites")
-        self.img_path = os.path.join ("img")
+# REPERTOIRE CONTENANT CODE CONCERNANT LES FICHIERS
+file_directory = os.path.join(code_directory, "file")
+save_game_path = os.path.join(file_directory, "save_game.py")
+file_paths_path = os.path.join(file_directory, "file_paths.py")
 
-file_paths = FilePaths()
+# REPERTOIRE CONTENANT CODE CONCERNANT LE GAMEPLAY
+gameplay_directory = os.path.join(code_directory, "gameplay")
+combat_path = os.path.join(gameplay_directory, "combat.py")
+map_path = os.path.join(gameplay_directory, "map.py")
+mouvement_path = os.path.join(gameplay_directory, "mouvement.py")
+rencontre_sauvage_path = os.path.join(gameplay_directory, "rencontre_sauvage.py")
+
+# REPERTOIRE CONTENANT CODE CONCERNANT LES MENUS
+menu_directory = os.path.join(code_directory, "menu")
+menu_pause_path = os.path.join(menu_directory, "menu_pause.py")
+menu_principal_path = os.path.join(menu_directory, "menu_principal.py")
+nouvelle_partie_path = os.path.join(menu_directory, "nouvelle_partie.py")
+pokedex_path = os.path.join(menu_directory, "pokedex.py")
+
+# REPERTOIRE CONTENANT CODE CONCERNANT LES PERSONNAGES
+personnage_directory = os.path.join(code_directory, "personnage")
+personnage_path = os.path.join(personnage_directory, "personnage.py")
+joueur_path = os.path.join(personnage_directory, "joueur.py")
+pnj_path = os.path.join(personnage_directory, "pnj.py")
+trainer_path = os.path.join(personnage_directory, "trainer.py")
+pokecenter_path = os.path.join(personnage_directory, "pokecenter.py")
+pokemart_path = os.path.join(personnage_directory, "pokemart.py")
+starter_pokeball_path = os.path.join(personnage_directory, "starter_pokeball.py")
+pokemon_path = os.path.join(personnage_directory, "pokemon.py")
+
+# REPERTOIRE CONTENANT IMAGES
+img_path = os.path.join(pokemon_directory, "img")
+pkmnsprites_path = os.path.join(img_path, "pkmnsprites")
