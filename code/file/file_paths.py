@@ -43,6 +43,10 @@ pokemon_path = os.path.join(personnage_directory, "pokemon.py")
 # REPERTOIRE CONTENANT IMAGES
 img_path = os.path.join(pokemon_directory, "img")
 pkmnsprites_path = os.path.join(img_path, "pkmnsprites")
+mainmenuimg_path = os.path.join(img_path, "mainmenuimg")
+
+# REPERTOIRE CONTENANT MUSIQUE
+music_path = os.path.join(pokemon_directory, "music")
 
 def select_sprites(image):
     if not isinstance(image, str):
