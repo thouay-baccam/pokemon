@@ -1,6 +1,7 @@
 import pygame
 import os
 from code.file.file_paths import mainmenuimg_path, music_path, font_path
+from code.menu.nouvelle_partie import NouvellePartie
 
 class MainMenu:
     def __init__(self, window_size):
@@ -58,9 +59,14 @@ class MainMenu:
         if button_text == "QUITTER":
             pygame.quit()
             sys.exit()
+        elif button_text == "NOUVELLE PARTIE":
+            self.run_nouvelle_partie()
         else:
             print(f"CE BOUTON NE MARCHE PAS ENCORE: {button_text}")
 
+    def run_nouvelle_partie(self):
+        nouvelle_partie = NouvellePartie(self.window_size)
+        nouvelle_partie.run()
 
     def run(self):
         clock = pygame.time.Clock()

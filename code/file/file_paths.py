@@ -51,6 +51,9 @@ music_path = os.path.join(pokemon_directory, "music")
 # REPERTOIRE CONTENANT LES FONTS
 font_path = os.path.join(pokemon_directory, "font")
 
+# REPERTOIRE CONTENANT LES DATAS
+data_path = os.path.join(pokemon_directory, "data")
+
 def select_sprites(image):
     if not isinstance(image, str):
         raise ValueError("Le nom du fichier doit être un string")
