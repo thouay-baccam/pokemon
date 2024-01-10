@@ -1,38 +1,55 @@
 import pygame
 import os
+import sys
 from code.file.file_paths import mainmenuimg_path, music_path, font_path
 from code.menu.nouvelle_partie import NouvellePartie
+from code.menu.pokedex import Pokedex
+
+
+# Constantes pour les dimensions et les positions
+WINDOW_SIZE = (800, 600)
 
 class MainMenu:
-    def __init__(self, window_size):
+    def __init__(self):
         pygame.init()
-        self.window_size = window_size
-        self.screen = pygame.display.set_mode(window_size)
+        self.window_size = WINDOW_SIZE
+        self.screen = pygame.display.set_mode(self.window_size)
         pygame.display.set_caption("Main Menu")
 
+        # Logo du jeu
         self.logo = pygame.image.load(os.path.join(mainmenuimg_path, "logo.png"))
         self.logo = pygame.transform.scale(self.logo, (500, 200))
         self.logo_rect = self.logo.get_rect()
         self.logo_rect.center = (self.window_size[0] // 2, 120)
 
+        # Arrière-plan du menu
         self.background = pygame.image.load(os.path.join(mainmenuimg_path, "background.jpg"))
         self.background = pygame.transform.scale(self.background, self.window_size)
 
+        # Position de l'arrière-plan
         self.background_position = 0
+
+        # Animation du logo
         self.logo_bounce = 0
         self.bounce_direction = 1
+
+        # Bouton sélectionné
         self.selected_button = 0  
 
+        # Chargement de la musique
         pygame.mixer.music.load(os.path.join(music_path, "mainmenumusic.wav"))
         pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(-1)
 
+        # Boutons du menu
         self.buttons = [
             {"text": "NOUVELLE PARTIE", "position": (self.window_size[0] // 2, 300)},
             {"text": "CONTINUER", "position": (self.window_size[0] // 2, 330)},
-            {"text": "AJOUTER UN POKEMON", "position": (self.window_size[0] // 2, 370)},
-            {"text": "QUITTER", "position": (self.window_size[0] // 2, 410)}
+            {"text": "POKEDEX", "position": (self.window_size[0] // 2, 370)},  # New Pokédex button
+            {"text": "AJOUTER UN POKEMON", "position": (self.window_size[0] // 2, 410)},
+            {"text": "QUITTER", "position": (self.window_size[0] // 2, 450)}
         ]
+
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -61,12 +78,18 @@ class MainMenu:
             sys.exit()
         elif button_text == "NOUVELLE PARTIE":
             self.run_nouvelle_partie()
+        elif button_text == "POKEDEX":  # Handle Pokédex button click
+            self.run_pokedex()
         else:
             print(f"CE BOUTON NE MARCHE PAS ENCORE: {button_text}")
 
     def run_nouvelle_partie(self):
-        nouvelle_partie = NouvellePartie(self.window_size)
+        nouvelle_partie = NouvellePartie()
         nouvelle_partie.run()
+    
+    def run_pokedex(self):
+        pokedex = Pokedex(WINDOW_SIZE)
+        pokedex.run()
 
     def run(self):
         clock = pygame.time.Clock()
@@ -74,12 +97,13 @@ class MainMenu:
         while True:
             self.handle_events()
 
+            # Animation de l'arrière-plan
             self.background_position -= 1
             if self.background_position <= -self.window_size[0]:
                 self.background_position = 0
 
+            # Animation du logo
             bounce_speed = 0.2
-
             max_bounce = 10
             if self.logo_bounce > max_bounce:
                 self.bounce_direction = -1
@@ -90,6 +114,7 @@ class MainMenu:
 
             self.logo_rect.centery = 120 + self.logo_bounce
 
+            # Affichage
             self.screen.blit(self.background, (self.background_position, 0))
             self.screen.blit(self.background, (self.background_position + self.window_size[0], 0))
 
@@ -101,7 +126,6 @@ class MainMenu:
                 text_rect = text.get_rect(center=button["position"])
                 self.screen.blit(text, text_rect)
 
-                
                 if i == self.selected_button:
                     pygame.draw.rect(self.screen, (0, 0, 0), (text_rect.x - 8, text_rect.y - 8, text_rect.width + 16, text_rect.height + 16), 4)
 

@@ -4,16 +4,20 @@ import sys
 import json
 from code.file.file_paths import font_path, music_path, mainmenuimg_path, data_path
 
+# Constantes pour les dimensions et les positions
+WINDOW_SIZE = (800, 600)
+INPUT_RECT_WIDTH_PERCENTAGE = 0.65
+
 class NouvellePartie:
-    def __init__(self, window_size):
+    def __init__(self):
         pygame.init()
-        self.window_size = window_size
-        self.screen = pygame.display.set_mode(window_size)
+        self.window_size = WINDOW_SIZE
+        self.screen = pygame.display.set_mode(self.window_size)
         pygame.display.set_caption("Nouvelle Partie")
 
         # Chargement du fond d'écran
         self.background = pygame.image.load(os.path.join(mainmenuimg_path, "newgamebackground.jpg"))
-        self.background = pygame.transform.scale(self.background, window_size)
+        self.background = pygame.transform.scale(self.background, self.window_size)
 
         # Animation du fond
         self.background_position = 0
@@ -25,11 +29,10 @@ class NouvellePartie:
         self.button_font = pygame.font.Font(os.path.join(font_path, "pkmn.ttf"), 40)
 
         # Définition du rectangle de l'input field
-        self.input_rect_width_percentage = 0.65
         self.input_rect = pygame.Rect(
-            (self.window_size[0] - (self.window_size[0] * self.input_rect_width_percentage)) // 2,
+            (self.window_size[0] - (self.window_size[0] * INPUT_RECT_WIDTH_PERCENTAGE)) // 2,
             250,
-            self.window_size[0] * self.input_rect_width_percentage,
+            self.window_size[0] * INPUT_RECT_WIDTH_PERCENTAGE,
             40
         )
 
@@ -39,23 +42,15 @@ class NouvellePartie:
 
         # Initialisation de l'input field
         self.input_text = ""
-        self.input_active = True  # Pour activer l'input field
+        self.input_active = True
 
         # Bouton "Commencer ma partie" centré en bas
         self.start_button_text = self.button_font.render("COMMENCER MA PARTIE", True, (0, 0, 0))
         button_width, button_height = self.start_button_text.get_size()
         button_x = (self.window_size[0] - button_width) // 2
-        button_y = self.window_size[1] - 60 - button_height  # Ajustement pour placer le bouton juste au-dessus du bas
+        button_y = self.window_size[1] - 60 - button_height
         self.start_button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
         self.start_button_text_rect = pygame.Rect(button_x, button_y, button_width, button_height)
-
-        # Initialisation du nom du joueur
-        self.player_name = ""
-
-        # Ajout de musique
-        pygame.mixer.music.load(os.path.join(music_path, "newgamemusic.wav"))
-        pygame.mixer.music.set_volume(0.5)
-        pygame.mixer.music.play(-1)
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -69,7 +64,7 @@ class NouvellePartie:
                 elif event.key == pygame.K_BACKSPACE:
                     self.input_text = self.input_text[:-1]
                 else:
-                    self.input_text += event.unicode  # Ajoute le caractère à l'input_text
+                    self.input_text += event.unicode
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.input_rect.collidepoint(event.pos):
@@ -81,13 +76,12 @@ class NouvellePartie:
                     self.finish_and_close()
 
     def finish_and_close(self):
-        # Ici, tu peux faire quelque chose avant de fermer l'application
         self.save_player_data()
         pygame.quit()
         sys.exit()
 
     def save_player_data(self):
-        player_data = {"nom": self.input_text}  # Remplacez cela par les données que vous souhaitez sauvegarder
+        player_data = {"nom": self.input_text}
         player_file_path = os.path.join(data_path, "player.json")
 
         with open(player_file_path, "w") as player_file:
@@ -125,5 +119,5 @@ class NouvellePartie:
             clock.tick(60)
 
 if __name__ == "__main__":
-    nouvelle_partie = NouvellePartie((800, 600))
+    nouvelle_partie = NouvellePartie()
     nouvelle_partie.run()
