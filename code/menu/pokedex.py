@@ -2,7 +2,7 @@ import pygame
 import os
 import json
 import sys
-from ..file.file_paths import data_path, font_path, pkmnsprites_path  # Adjusted for relative import
+from code.file.file_paths import font_path, music_path, mainmenuimg_path, data_path, pkmnsprites_path
 
 class Pokedex:
     def __init__(self, window_size):
@@ -11,6 +11,14 @@ class Pokedex:
         self.screen = pygame.display.set_mode(window_size)
         pygame.display.set_caption("Pokédex")
 
+        # Load the background image for the Pokedex
+        self.background = pygame.image.load(os.path.join(mainmenuimg_path, "pokedexbg.png"))
+        self.background = pygame.transform.scale(self.background, self.window_size)
+
+        # Define areas for the list and the information based on the background image
+        self.list_area_rect = pygame.Rect(50, 100, 300, 400)  # Adjust these values to fit the left white area
+        self.info_area_rect = pygame.Rect(450, 100, 300, 400)  # Adjust these values to fit the right white area
+
         self.load_resources()
         self.selected_pokemon = None
         self.sprites = self.load_pokemon_sprites()
@@ -18,7 +26,7 @@ class Pokedex:
         # Scroll variables
         self.scroll_y = 0
         self.scroll_speed = 30
-        self.max_scroll = len(self.pokedex) * 30 - 300  # Adjust based on list area height
+        self.max_scroll = len(self.pokedex) * 30 - self.list_area_rect.height
 
     def load_resources(self):
         """ Load resources such as pokedex data and fonts. """
@@ -45,7 +53,7 @@ class Pokedex:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 4:  # Scroll up
                     self.scroll_y = max(self.scroll_y - self.scroll_speed, 0)
-                if event.button == 5:  # Scroll down
+                elif event.button == 5:  # Scroll down
                     self.scroll_y = min(self.scroll_y + self.scroll_speed, self.max_scroll)
 
                 # Check for Pokémon selection
@@ -53,23 +61,22 @@ class Pokedex:
 
     def check_pokemon_selection(self, mouse_pos):
         """ Check if a pokemon in the list has been selected. """
-        list_start_y = 50 - self.scroll_y
+        list_start_y = self.list_area_rect.top - self.scroll_y
         for i, pokemon in enumerate(self.pokedex):
-            pokemon_rect = pygame.Rect(20, list_start_y + i * 30, 200, 100)
+            pokemon_rect = pygame.Rect(self.list_area_rect.left, list_start_y + i * 30, self.list_area_rect.width, 30)
             if pokemon_rect.collidepoint(mouse_pos):
                 self.selected_pokemon = pokemon
                 break
 
     def display_pokemon_list(self):
         """ Display the scrollable list of pokemon. """
-        list_area = pygame.Rect(20, 50, 200, 300)  # Adjust as needed
-        list_start_y = 50 - self.scroll_y
+        list_start_y = self.list_area_rect.top - self.scroll_y
 
         for i, pokemon in enumerate(self.pokedex):
             text = self.text_font.render(pokemon["name"], True, (0, 0, 0))
-            text_rect = text.get_rect(topleft=(30, list_start_y + i * 30))
+            text_rect = text.get_rect(topleft=(self.list_area_rect.left + 10, list_start_y + i * 30))
 
-            if list_area.collidepoint(text_rect.topleft) or list_area.collidepoint(text_rect.bottomleft):
+            if self.list_area_rect.collidepoint(text_rect.topleft) or self.list_area_rect.collidepoint(text_rect.bottomleft):
                 self.screen.blit(text, text_rect)
 
     def display_selected_pokemon_info(self):
@@ -79,10 +86,10 @@ class Pokedex:
             if pokemon_name in self.sprites:
                 sprite = self.sprites[pokemon_name]
                 sprite = pygame.transform.scale(sprite, (100, 100))  # Resize sprite
-                sprite_rect = sprite.get_rect(center=(self.window_size[0] // 2, 100))
+                sprite_rect = sprite.get_rect(center=(self.info_area_rect.centerx, self.info_area_rect.top + 120))
                 self.screen.blit(sprite, sprite_rect)
 
-            info_y_start = 220
+            info_y_start = self.info_area_rect.top + 240
             info_gap = 30
             name = f"Nom: {self.selected_pokemon['name']}"
             region = f"Région: {self.selected_pokemon['region']}"
@@ -90,7 +97,7 @@ class Pokedex:
 
             for i, info in enumerate([name, region, encountered]):
                 text = self.text_font.render(info, True, (0, 0, 0))
-                text_rect = text.get_rect(center=(self.window_size[0] // 2, info_y_start + i * info_gap))
+                text_rect = text.get_rect(midleft=(self.info_area_rect.left + 20, info_y_start + i * info_gap))
                 self.screen.blit(text, text_rect)
 
     def run(self):
@@ -98,7 +105,7 @@ class Pokedex:
         clock = pygame.time.Clock()
         while True:
             self.handle_events()
-            self.screen.fill((255, 255, 255))
+            self.screen.blit(self.background, (0, 0))  # Corrected from self.background_image to self.background
             self.display_pokemon_list()
             self.display_selected_pokemon_info()
             pygame.display.flip()
