@@ -4,7 +4,7 @@ import sys
 from code.file.file_paths import mainmenuimg_path, music_path, font_path
 from code.menu.nouvelle_partie import NouvellePartie
 from code.menu.pokedex import Pokedex
-
+from code.menu.pokedexadd import PokedexAdd
 
 # Constantes pour les dimensions et les positions
 WINDOW_SIZE = (800, 600)
@@ -80,6 +80,8 @@ class MainMenu:
             self.run_nouvelle_partie()
         elif button_text == "POKEDEX":  # Handle Pokédex button click
             self.run_pokedex()
+        elif button_text == "AJOUTER UN POKEMON":  # Handle PokedexAdd button click
+            self.run_pokedex_add()
         else:
             print(f"CE BOUTON NE MARCHE PAS ENCORE: {button_text}")
 
@@ -90,6 +92,10 @@ class MainMenu:
     def run_pokedex(self):
         pokedex = Pokedex(WINDOW_SIZE)
         pokedex.run()
+
+    def run_pokedex_add(self):
+        pokedex_add = PokedexAdd()
+        pokedex_add.run()
 
     def run(self):
         clock = pygame.time.Clock()
