@@ -2,7 +2,11 @@ import pygame
 import os
 import sys
 import json
-from code.file.file_paths import font_path, music_path, mainmenuimg_path, data_path
+
+# Assuming file_paths.py now provides directory paths
+# In nouvelle_partie.py
+from .file_paths import font_directory, music_directory, img_directory, backgrounds_directory, data_directory
+
 
 # Constantes pour les dimensions et les positions
 WINDOW_SIZE = (800, 600)
@@ -16,7 +20,7 @@ class NouvellePartie:
         pygame.display.set_caption("Nouvelle Partie")
 
         # Chargement du fond d'écran
-        self.background = pygame.image.load(os.path.join(mainmenuimg_path, "newgamebackground.jpg"))
+        self.background = pygame.image.load(os.path.join(backgrounds_directory, "newgame.jpg"))
         self.background = pygame.transform.scale(self.background, self.window_size)
 
         # Animation du fond
@@ -24,9 +28,9 @@ class NouvellePartie:
         self.background_speed = 2
 
         # Définition des polices
-        self.text_font = pygame.font.Font(os.path.join(font_path, "pkmn.ttf"), 24)
-        self.input_font = pygame.font.Font(os.path.join(font_path, "pkmn.ttf"), 18)
-        self.button_font = pygame.font.Font(os.path.join(font_path, "pkmn.ttf"), 40)
+        self.text_font = pygame.font.Font(os.path.join(font_directory, "pkmn.ttf"), 24)
+        self.input_font = pygame.font.Font(os.path.join(font_directory, "pkmn.ttf"), 18)
+        self.button_font = pygame.font.Font(os.path.join(font_directory, "pkmn.ttf"), 40)
 
         # Définition du rectangle de l'input field
         self.input_rect = pygame.Rect(
@@ -82,7 +86,7 @@ class NouvellePartie:
 
     def save_player_data(self):
         player_data = {"nom": self.input_text}
-        player_file_path = os.path.join(data_path, "player.json")
+        player_file_path = os.path.join(data_directory, "player.json")
 
         with open(player_file_path, "w") as player_file:
             json.dump(player_data, player_file)

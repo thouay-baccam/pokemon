@@ -1,4 +1,4 @@
-from code.menu.menu_principal import MainMenu
+from code.menu_principal import MainMenu
 
 if __name__ == "__main__":
     main_menu = MainMenu()

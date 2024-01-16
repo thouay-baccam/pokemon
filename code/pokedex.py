@@ -2,7 +2,8 @@ import pygame
 import os
 import json
 import sys
-from code.file.file_paths import font_path, music_path, mainmenuimg_path, data_path, pkmnsprites_path
+from .file_paths import font_directory, music_directory, img_directory, backgrounds_directory, data_directory, pkmnsprites_directory
+
 
 class Pokedex:
     def __init__(self, window_size):
@@ -12,7 +13,7 @@ class Pokedex:
         pygame.display.set_caption("Pokédex")
 
         # Load the background image for the Pokedex
-        self.background = pygame.image.load(os.path.join(mainmenuimg_path, "pokedexbg.png"))
+        self.background = pygame.image.load(os.path.join(backgrounds_directory, "pokedex.png"))
         self.background = pygame.transform.scale(self.background, self.window_size)
 
         # Define areas for the list and the information
@@ -31,19 +32,20 @@ class Pokedex:
 
     def load_resources(self):
         """ Load resources such as pokedex data and fonts. """
-        with open(os.path.join(data_path, "pokedex.json"), "r") as pokedex_file:
+        with open(os.path.join(data_directory, "pokedex.json"), "r") as pokedex_file:
             self.pokedex = json.load(pokedex_file)
-        self.text_font = pygame.font.Font(os.path.join(font_path, "pkmn.ttf"), 20)
+        self.text_font = pygame.font.Font(os.path.join(font_directory, "pkmn.ttf"), 20)
 
     def load_pokemon_sprites(self):
         """ Load pokemon sprites into a dictionary. """
         sprites = {}
         for pokemon in self.pokedex:
             pokemon_name = pokemon["name"].lower()
-            sprite_path = os.path.join(pkmnsprites_path, f"{pokemon_name}.png")
+            sprite_path = os.path.join(pkmnsprites_directory, f"{pokemon_name}.png")
             if os.path.exists(sprite_path):
                 sprites[pokemon_name] = pygame.image.load(sprite_path)
         return sprites
+
 
     def handle_events(self):
         """ Handle user input events. """

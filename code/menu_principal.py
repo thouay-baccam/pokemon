@@ -1,10 +1,11 @@
 import pygame
 import os
 import sys
-from code.file.file_paths import mainmenuimg_path, music_path, font_path
-from code.menu.nouvelle_partie import NouvellePartie
-from code.menu.pokedex import Pokedex
-from code.menu.pokedexadd import PokedexAdd
+from .nouvelle_partie import NouvellePartie
+from .pokedex import Pokedex
+from .pokedexadd import PokedexAdd
+from .file_paths import img_directory, backgrounds_directory, music_directory, font_directory
+
 
 # Constantes pour les dimensions et les positions
 WINDOW_SIZE = (800, 600)
@@ -17,13 +18,13 @@ class MainMenu:
         pygame.display.set_caption("Main Menu")
 
         # Logo du jeu
-        self.logo = pygame.image.load(os.path.join(mainmenuimg_path, "logo.png"))
+        self.logo = pygame.image.load(os.path.join(img_directory, "logo.png"))
         self.logo = pygame.transform.scale(self.logo, (500, 200))
         self.logo_rect = self.logo.get_rect()
         self.logo_rect.center = (self.window_size[0] // 2, 120)
 
         # Arrière-plan du menu
-        self.background = pygame.image.load(os.path.join(mainmenuimg_path, "background.jpg"))
+        self.background = pygame.image.load(os.path.join(backgrounds_directory, "mainmenu.jpg"))
         self.background = pygame.transform.scale(self.background, self.window_size)
 
         # Position de l'arrière-plan
@@ -37,7 +38,7 @@ class MainMenu:
         self.selected_button = 0  
 
         # Chargement de la musique
-        pygame.mixer.music.load(os.path.join(music_path, "mainmenumusic.wav"))
+        pygame.mixer.music.load(os.path.join(music_directory, "mainmenumusic.wav"))
         pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(-1)
 
@@ -126,7 +127,7 @@ class MainMenu:
 
             self.screen.blit(self.logo, self.logo_rect)
 
-            custom_font = pygame.font.Font(os.path.join(font_path, "pkmn.ttf"), 16)
+            custom_font = pygame.font.Font(os.path.join(font_directory, "pkmn.ttf"), 16)
             for i, button in enumerate(self.buttons):
                 text = custom_font.render(button["text"], True, (0, 0, 0))
                 text_rect = text.get_rect(center=button["position"])

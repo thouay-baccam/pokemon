@@ -4,7 +4,7 @@ import sys
 import json
 import tkinter as tk
 from tkinter import filedialog
-from code.file.file_paths import font_path, mainmenuimg_path, data_path, pkmnsprites_path
+from .file_paths import font_directory, backgrounds_directory, data_directory, pkmnsprites_directory
 
 # Constantes pour les dimensions et les positions
 WINDOW_SIZE = (800, 600)
@@ -17,13 +17,13 @@ class PokedexAdd:
         self.screen = pygame.display.set_mode(self.window_size)
         pygame.display.set_caption("Ajouter un Pokémon")
 
-        # Chargement du fond d'écran
-        self.background = pygame.image.load(os.path.join(mainmenuimg_path, "addpokedexbg.jpg"))
+        # Loading the background image
+        self.background = pygame.image.load(os.path.join(backgrounds_directory, "addpokedex.jpg"))
         self.background = pygame.transform.scale(self.background, self.window_size)
 
-        # Définition des polices
-        self.text_font = pygame.font.Font(os.path.join(font_path, "pkmn.ttf"), 24)
-        self.input_font = pygame.font.Font(os.path.join(font_path, "pkmn.ttf"), 18)
+        # Setting up the fonts
+        self.text_font = pygame.font.Font(os.path.join(font_directory, "pkmn.ttf"), 24)
+        self.input_font = pygame.font.Font(os.path.join(font_directory, "pkmn.ttf"), 18)
 
         # Définition du rectangle de l'input field
         self.input_rect = pygame.Rect(
@@ -33,7 +33,7 @@ class PokedexAdd:
             40
         )
         self.input_text = ""
-        self.image_path = ""
+        self.image_directory = ""
 
         # Texte au-dessus de l'input field
         self.text = self.text_font.render("Nom du Pokémon:", True, (255, 255, 255))
@@ -72,16 +72,23 @@ class PokedexAdd:
     def open_file_dialog(self):
         root = tk.Tk()
         root.withdraw()
-        file_path = filedialog.askopenfilename(filetypes=[("PNG Images", "*.png")])
-        if file_path:
-            self.image_path = file_path
+        file_directory = filedialog.askopenfilename(filetypes=[("PNG Images", "*.png")])
+        if file_directory:
+            self.image_directory = file_directory
 
     def save_pokemon(self):
         new_pokemon = {
             "name": self.input_text,
-            "image_path": self.image_path
+            "image_directory": self.image_directory
         }
-        # Here you should add logic to save the new_pokemon data to your pokedex.json or relevant data structure.
+        # Add logic to save the new_pokemon data to your pokedex.json or relevant data structure.
+        with open(os.path.join(data_directory, 'pokedex.json'), 'r+') as file:
+            pokedex = json.load(file)
+            pokedex.append(new_pokemon)  # Assuming it's a list in the JSON
+            file.seek(0)  # Resets file position to the beginning.
+            json.dump(pokedex, file, indent=4)
+            file.truncate()  # Truncate file to new length if necessary.
+
 
     def run(self):
         clock = pygame.time.Clock()
