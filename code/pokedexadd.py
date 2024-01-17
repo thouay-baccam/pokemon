@@ -21,6 +21,7 @@ class PokedexAdd:
         pygame.init()
         self.window_size = WINDOW_SIZE
         self.screen = pygame.display.set_mode(self.window_size)
+        self.running = True
         pygame.display.set_caption("Ajouter un Pokémon")
 
         # Loading the background image
@@ -81,11 +82,15 @@ class PokedexAdd:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
                     self.input_text = self.input_text[:-1]
+                elif event.key == pygame.K_ESCAPE:
+                    self.running = False
                 else:
                     self.input_text += event.unicode
+
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.add_image_button_rect.collidepoint(event.pos):
                     self.open_file_dialog()
@@ -101,7 +106,7 @@ class PokedexAdd:
 
     def save_pokemon(self):
         new_pokemon = {"name": self.input_text, "image_directory": self.image_directory}
-        # Add logic to save the new_pokemon data to your pokedex.json or relevant data structure.
+        # Add logic to save the new_pokemon data to pokedex.json
         with open(os.path.join(data_directory, "pokedex.json"), "r+") as file:
             pokedex = json.load(file)
             pokedex.append(new_pokemon)  # Assuming it's a list in the JSON
@@ -112,7 +117,7 @@ class PokedexAdd:
     def run(self):
         clock = pygame.time.Clock()
 
-        while True:
+        while self.running:
             self.handle_events()
 
             # Affiche le fond
