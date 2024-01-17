@@ -17,6 +17,7 @@ class Pokedex:
         pygame.init()
         self.window_size = window_size
         self.screen = pygame.display.set_mode(window_size)
+        self.running = True
         pygame.display.set_caption("Pokédex")
 
         # Load the background image for the Pokedex
@@ -85,6 +86,8 @@ class Pokedex:
                     self.scroll_y = max(self.scroll_y - self.scroll_speed, 0)
                 elif event.key == pygame.K_RETURN:
                     self.selected_pokemon = self.pokedex[self.selected_pokemon_index]
+                elif event.key == pygame.K_ESCAPE:
+                    self.running = False
 
     def check_pokemon_selection(self, mouse_pos):
         """Check if a pokemon in the list has been selected."""
@@ -150,7 +153,7 @@ class Pokedex:
 
     def run(self):
         clock = pygame.time.Clock()
-        while True:
+        while self.running:
             self.handle_events()
             self.screen.blit(self.background, (0, 0))
             self.display_pokemon_list()
