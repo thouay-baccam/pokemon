@@ -5,12 +5,19 @@ import json
 
 # Assuming file_paths.py now provides directory paths
 # In nouvelle_partie.py
-from .file_paths import font_directory, music_directory, img_directory, backgrounds_directory, data_directory
+from .file_paths import (
+    font_directory,
+    music_directory,
+    img_directory,
+    backgrounds_directory,
+    data_directory,
+)
 
 
 # Constantes pour les dimensions et les positions
 WINDOW_SIZE = (800, 600)
 INPUT_RECT_WIDTH_PERCENTAGE = 0.65
+
 
 class NouvellePartie:
     def __init__(self):
@@ -20,7 +27,9 @@ class NouvellePartie:
         pygame.display.set_caption("Nouvelle Partie")
 
         # Chargement du fond d'écran
-        self.background = pygame.image.load(os.path.join(backgrounds_directory, "newgame.jpg"))
+        self.background = pygame.image.load(
+            os.path.join(backgrounds_directory, "newgame.jpg")
+        )
         self.background = pygame.transform.scale(self.background, self.window_size)
 
         # Animation du fond
@@ -30,31 +39,42 @@ class NouvellePartie:
         # Définition des polices
         self.text_font = pygame.font.Font(os.path.join(font_directory, "pkmn.ttf"), 24)
         self.input_font = pygame.font.Font(os.path.join(font_directory, "pkmn.ttf"), 18)
-        self.button_font = pygame.font.Font(os.path.join(font_directory, "pkmn.ttf"), 40)
+        self.button_font = pygame.font.Font(
+            os.path.join(font_directory, "pkmn.ttf"), 40
+        )
 
         # Définition du rectangle de l'input field
         self.input_rect = pygame.Rect(
-            (self.window_size[0] - (self.window_size[0] * INPUT_RECT_WIDTH_PERCENTAGE)) // 2,
+            (self.window_size[0] - (self.window_size[0] * INPUT_RECT_WIDTH_PERCENTAGE))
+            // 2,
             250,
             self.window_size[0] * INPUT_RECT_WIDTH_PERCENTAGE,
-            40
+            40,
         )
 
         # Texte au-dessus de l'input field
         self.text = self.text_font.render("Quel est ton nom?", True, (255, 255, 255))
-        self.text_rect = self.text.get_rect(center=(self.window_size[0] // 2, self.window_size[1] // 4))
+        self.text_rect = self.text.get_rect(
+            center=(self.window_size[0] // 2, self.window_size[1] // 4)
+        )
 
         # Initialisation de l'input field
         self.input_text = ""
         self.input_active = True
 
         # Bouton "Commencer ma partie" centré en bas
-        self.start_button_text = self.button_font.render("COMMENCER MA PARTIE", True, (0, 0, 0))
+        self.start_button_text = self.button_font.render(
+            "COMMENCER MA PARTIE", True, (0, 0, 0)
+        )
         button_width, button_height = self.start_button_text.get_size()
         button_x = (self.window_size[0] - button_width) // 2
         button_y = self.window_size[1] - 60 - button_height
-        self.start_button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
-        self.start_button_text_rect = pygame.Rect(button_x, button_y, button_width, button_height)
+        self.start_button_rect = pygame.Rect(
+            button_x, button_y, button_width, button_height
+        )
+        self.start_button_text_rect = pygame.Rect(
+            button_x, button_y, button_width, button_height
+        )
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -104,14 +124,18 @@ class NouvellePartie:
 
             # Affiche le fond
             self.screen.blit(self.background, (self.background_position, 0))
-            self.screen.blit(self.background, (self.background_position + self.window_size[0], 0))
+            self.screen.blit(
+                self.background, (self.background_position + self.window_size[0], 0)
+            )
 
             # Affiche le texte et le champ d'entrée
             self.screen.blit(self.text, self.text_rect)
             pygame.draw.rect(self.screen, (255, 255, 255), self.input_rect)
 
             # Affiche le texte saisi
-            input_text_surface = self.input_font.render(self.input_text, True, (0, 0, 0))
+            input_text_surface = self.input_font.render(
+                self.input_text, True, (0, 0, 0)
+            )
             input_text_rect = input_text_surface.get_rect(center=self.input_rect.center)
             self.screen.blit(input_text_surface, input_text_rect)
 
@@ -121,6 +145,7 @@ class NouvellePartie:
 
             pygame.display.flip()
             clock.tick(60)
+
 
 if __name__ == "__main__":
     nouvelle_partie = NouvellePartie()
