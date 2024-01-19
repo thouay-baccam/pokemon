@@ -69,7 +69,8 @@ class Pokedex:
                     self.scroll_y = min(
                         self.scroll_y + self.scroll_speed, self.max_scroll
                     )
-                self.check_pokemon_selection(event.pos)
+                self.selected_pokemon_index = self.check_pokemon_selection(event.pos)
+                self.selected_pokemon = self.pokedex[self.selected_pokemon_index]
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
@@ -86,6 +87,7 @@ class Pokedex:
                     self.scroll_y = max(self.scroll_y - self.scroll_speed, 0)
                 elif event.key == pygame.K_RETURN:
                     self.selected_pokemon = self.pokedex[self.selected_pokemon_index]
+                    print(self.selected_pokemon_index)
                 elif event.key == pygame.K_ESCAPE:
                     self.running = False
 
@@ -101,7 +103,7 @@ class Pokedex:
             )
             if pokemon_rect.collidepoint(mouse_pos):
                 self.selected_pokemon = pokemon
-                break
+                return i
 
     def display_pokemon_list(self):
         """Display the scrollable list of pokemon."""
