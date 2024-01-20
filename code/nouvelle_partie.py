@@ -24,6 +24,7 @@ class NouvellePartie:
         pygame.init()
         self.window_size = WINDOW_SIZE
         self.screen = pygame.display.set_mode(self.window_size)
+        self.running = True
         pygame.display.set_caption("Nouvelle Partie")
 
         # Chargement du fond d'écran
@@ -87,8 +88,10 @@ class NouvellePartie:
                     self.finish_and_close()
                 elif event.key == pygame.K_BACKSPACE:
                     self.input_text = self.input_text[:-1]
-                else:
-                    self.input_text += event.unicode
+                elif event.key == pygame.K_ESCAPE:
+                    self.running = False
+                elif pygame.K_a <= event.key <= pygame.K_z:
+                    self.input_text += event.unicode.upper()
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.input_rect.collidepoint(event.pos):
@@ -114,7 +117,7 @@ class NouvellePartie:
     def run(self):
         clock = pygame.time.Clock()
 
-        while True:
+        while self.running:
             self.handle_events()
 
             # Animation du fond

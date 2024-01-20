@@ -88,8 +88,8 @@ class PokedexAdd:
                     self.input_text = self.input_text[:-1]
                 elif event.key == pygame.K_ESCAPE:
                     self.running = False
-                else:
-                    self.input_text += event.unicode
+                elif pygame.K_a <= event.key <= pygame.K_z:
+                    self.input_text += event.unicode.upper()
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if self.add_image_button_rect.collidepoint(event.pos):
