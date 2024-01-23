@@ -1,8 +1,8 @@
 [
 {
         "name": "Bulbasaur",
-        "type": "Grass",
-        "type2": "Poison",
+        "type_1": "5",
+        "type_2": "8",
         "moves": ["Quick Bash", "Guard Up", "Leaf Whip"],
         "attack_stat": 49,
         "defense_stat": 49,
@@ -11,8 +11,8 @@
     },
     {
         "name": "Ivysaur",
-        "type": "Grass",
-        "type2": "Poison",
+        "type_1": "5",
+        "type_2": "8",
         "moves": ["Quick Bash", "Guard Up", "Vine Lash"],
         "attack_stat": 62,
         "defense_stat": 63,
@@ -21,8 +21,8 @@
     },
     {
         "name": "Venusaur",
-        "type": "Grass",
-        "type2": "Poison",
+        "type_1": "5",
+        "type_2": "8",
         "moves": ["Quick Bash", "Guard Up", "Leaf Storm"],
         "attack_stat": 82,
         "defense_stat": 83,
@@ -31,7 +31,7 @@
     },
     {
         "name": "Charmander",
-        "type": "Fire",
+        "type_1": "2",
         "moves": ["Quick Bash", "Guard Up", "Flame Tail"],
         "attack_stat": 52,
         "defense_stat": 43,
@@ -40,7 +40,7 @@
     },
     {
         "name": "Charmeleon",
-        "type": "Fire",
+        "type_1": "2",
         "moves": ["Quick Bash", "Guard Up", "Fire Spin"],
         "attack_stat": 64,
         "defense_stat": 58,
@@ -49,8 +49,8 @@
     },
     {
         "name": "Charizard",
-        "type": "Fire",
-        "type2": "Flying",
+        "type_1": "2",
+        "type_2": "10",
         "moves": ["Quick Bash", "Guard Up", "Flame Burst"],
         "attack_stat": 84,
         "defense_stat": 78,
@@ -59,7 +59,7 @@
     },
     {
         "name": "Squirtle",
-        "type": "Water",
+        "type_": "3",
         "moves": ["Quick Bash", "Guard Up", "Water Gun"],
         "attack_stat": 48,
         "defense_stat": 65,
@@ -68,7 +68,7 @@
     },
     {
         "name": "Wartortle",
-        "type": "Water",
+        "type_": "3",
         "moves": ["Quick Bash", "Guard Up", "Bubble Beam"],
         "attack_stat": 63,
         "defense_stat": 80,
@@ -77,7 +77,7 @@
     },
     {
         "name": "Blastoise",
-        "type": "Water",
+        "type_": "3",
         "moves": ["Quick Bash", "Guard Up", "Hydro Pump"],
         "attack_stat": 83,
         "defense_stat": 100,
@@ -86,7 +86,7 @@
     },
     {
         "name": "Caterpie",
-        "type": "Bug",
+        "type_": "12",
         "moves": ["Quick Bash", "Guard Up", "String Shot"],
         "attack_stat": 30,
         "defense_stat": 35,
@@ -95,7 +95,7 @@
     },
     {
         "name": "Metapod",
-        "type": "Bug",
+        "type_": "12",
         "moves": ["Quick Bash", "Guard Up", "Harden"],
         "attack_stat": 20,
         "defense_stat": 55,
@@ -104,11 +104,202 @@
     },
     {
         "name": "Butterfree",
-        "type": "Bug",
-        "type2": "Flying",
+        "type_": "12",
+        "type_2": "10",
         "moves": ["Quick Bash", "Guard Up", "Gust"],
         "attack_stat": 45,
         "defense_stat": 50,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Spearow",
+        "type_1": "1",
+        "type_2": "10",
+        "moves": ["Quick Bash", "Guard Up", "Peck"],
+        "attack_stat": 60,
+        "defense_stat": 30,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Fearow",
+        "type_1": "1",
+        "type_2": "10",
+        "moves": ["Quick Bash", "Guard Up", "Drill Peck"],
+        "attack_stat": 90,
+        "defense_stat": 65,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Ekans",
+        "type_1": "8",
+        "moves": ["Quick Bash", "Guard Up", "Acid"],
+        "attack_stat": 60,
+        "defense_stat": 44,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Arbok",
+        "type_1": "8",
+        "moves": ["Quick Bash", "Guard Up", "Poison Fang"],
+        "attack_stat": 85,
+        "defense_stat": 69,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Pikachu",
+        "type_1": "4",
+        "moves": ["Quick Bash", "Guard Up", "Thunder Shock"],
+        "attack_stat": 55,
+        "defense_stat": 40,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Raichu",
+        "type_1": "4",
+        "moves": ["Quick Bash", "Guard Up", "Thunder Punch"],
+        "attack_stat": 90,
+        "defense_stat": 55,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Aggron",
+        "type_1": "13",
+        "type_2": "9",
+        "moves": ["Quick Bash", "Guard Up", "Metal Claw"],
+        "attack_stat": 110,
+        "defense_stat": 180,
+        "region": "Hoenn",
+        "encountered": false
+    },
+    {
+        "name": "Articuno",
+        "type_1": "6",
+        "type_2": "10",
+        "moves": ["Quick Bash", "Guard Up", "Ice Beam"],
+        "attack_stat": 85,
+        "defense_stat": 100,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Diglett",
+        "type_1": "9",
+        "moves": ["Quick Bash", "Guard Up", "Dig"],
+        "attack_stat": 55,
+        "defense_stat": 25,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Dragonair",
+        "type_1": "15",
+        "moves": ["Quick Bash", "Guard Up", "Dragon Breath"],
+        "attack_stat": 84,
+        "defense_stat": 65,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Dragonite",
+        "type_1": "15",
+        "type_2": "10",
+        "moves": ["Quick Bash", "Guard Up", "Dragon Claw"],
+        "attack_stat": 134,
+        "defense_stat": 95,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Dratini",
+        "type_1": "15",
+        "moves": ["Quick Bash", "Guard Up", "Twister"],
+        "attack_stat": 64,
+        "defense_stat": 45,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Dugtrio",
+        "type_1": "9",
+        "moves": ["Quick Bash", "Guard Up", "Earthquake"],
+        "attack_stat": 100,
+        "defense_stat": 50,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Eevee",
+        "type_1": "1",
+        "moves": ["Quick Bash", "Guard Up", "Tackle"],
+        "attack_stat": 55,
+        "defense_stat": 50,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Gastly",
+        "type_1": "14",
+        "type_2": "4",
+        "moves": ["Quick Bash", "Guard Up", "Lick"],
+        "attack_stat": 35,
+        "defense_stat": 30,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Gengar",
+        "type_1": "14",
+        "type_2": "4",
+        "moves": ["Quick Bash", "Guard Up", "Shadow Ball"],
+        "attack_stat": 65,
+        "defense_stat": 60,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Geodude",
+        "type_1": "13",
+        "type_2": "9",
+        "moves": ["Quick Bash", "Guard Up", "Rock Throw"],
+        "attack_stat": 80,
+        "defense_stat": 100,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Golem",
+        "type_1": "13",
+        "type_2": "9",
+        "moves": ["Quick Bash", "Guard Up", "Earthquake"],
+        "attack_stat": 120,
+        "defense_stat": 130,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Graveler",
+        "type_1": "13",
+        "type_2": "9",
+        "moves": ["Quick Bash", "Guard Up", "Rock Slide"],
+        "attack_stat": 95,
+        "defense_stat": 115,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Haunter",
+        "type_1": "14",
+        "type_2": "4",
+        "moves": ["Quick Bash", "Guard Up", "Shadow Punch"],
+        "attack_stat": 50,
+        "defense_stat": 45,
         "region": "Kanto",
         "encountered": false
     }
