@@ -59,7 +59,7 @@
     },
     {
         "name": "Squirtle",
-        "type_": "3",
+        "type_1": "3",
         "moves": ["Quick Bash", "Guard Up", "Water Gun"],
         "attack_stat": 48,
         "defense_stat": 65,
@@ -68,7 +68,7 @@
     },
     {
         "name": "Wartortle",
-        "type_": "3",
+        "type_1": "3",
         "moves": ["Quick Bash", "Guard Up", "Bubble Beam"],
         "attack_stat": 63,
         "defense_stat": 80,
@@ -77,7 +77,7 @@
     },
     {
         "name": "Blastoise",
-        "type_": "3",
+        "type_1": "3",
         "moves": ["Quick Bash", "Guard Up", "Hydro Pump"],
         "attack_stat": 83,
         "defense_stat": 100,
@@ -86,7 +86,7 @@
     },
     {
         "name": "Caterpie",
-        "type_": "12",
+        "type_1": "12",
         "moves": ["Quick Bash", "Guard Up", "String Shot"],
         "attack_stat": 30,
         "defense_stat": 35,
@@ -95,7 +95,7 @@
     },
     {
         "name": "Metapod",
-        "type_": "12",
+        "type_1": "12",
         "moves": ["Quick Bash", "Guard Up", "Harden"],
         "attack_stat": 20,
         "defense_stat": 55,
@@ -104,7 +104,7 @@
     },
     {
         "name": "Butterfree",
-        "type_": "12",
+        "type_1": "12",
         "type_2": "10",
         "moves": ["Quick Bash", "Guard Up", "Gust"],
         "attack_stat": 45,
@@ -170,8 +170,8 @@
     },
     {
         "name": "Aggron",
-        "type_1": "13",
-        "type_2": "9",
+        "type_1": "17",
+        "type_2": "13",
         "moves": ["Quick Bash", "Guard Up", "Metal Claw"],
         "attack_stat": 110,
         "defense_stat": 180,

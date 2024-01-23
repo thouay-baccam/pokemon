@@ -44,6 +44,27 @@ class Pokedex:
         self.scroll_speed = 30
         self.max_scroll = len(self.pokedex) * 30 - self.list_area_rect.height
 
+        self.types = {
+        '0': "No Type",
+        '1': "Normal",
+        '2': "Fire",
+        '3': "Water",
+        '4': "Electric",
+        '5': "Grass",
+        '6': "Ice",
+        '7': "Fight",
+        '8': "Poison",
+        '9': "Ground",
+        '10': "Flying",
+        '11': "Psychic",
+        '12': "Bug",
+        '13': "Rock",
+        '14': "Ghost",
+        '15': "Dragon",
+        '16': "Dark",
+        '17': "Steel",
+    }
+
     def load_resources(self):
         """Load resources such as pokedex data and fonts."""
         with open(os.path.join(data_directory, "pokedex.json"), "r") as pokedex_file:
@@ -144,11 +165,27 @@ class Pokedex:
 
             info_y_start = self.info_area_rect.top + 240
             info_gap = 30
-            name = f"Nom: {self.selected_pokemon['name']}"
-            region = f"Région: {self.selected_pokemon['region']}"
+            name = f"Name: {self.selected_pokemon['name']}"
+            region = f"Region: {self.selected_pokemon['region']}"
             encountered = (
-                f"Rencontré: {'Oui' if self.selected_pokemon['encountered'] else 'Non'}"
+                f"Encountered: {'Yes' if self.selected_pokemon['encountered'] else 'No'}"
             )
+
+            # Add code to display types
+            types_text = "Type: "
+            type_1 = self.selected_pokemon["type_1"]
+            type_2 = self.selected_pokemon.get("type_2", None)
+
+            if type_1 in self.types:
+                types_text += self.types[type_1]
+            if type_2 in self.types:
+                types_text += " / " + self.types[type_2]
+
+            types = self.text_font.render(types_text, True, (0, 0, 0))
+            types_rect = types.get_rect(
+                midleft=(self.info_area_rect.left + 20, info_y_start + 3 * info_gap)
+            )
+            self.screen.blit(types, types_rect)
 
             for i, info in enumerate([name, region, encountered]):
                 text = self.text_font.render(info, True, (0, 0, 0))
@@ -156,6 +193,7 @@ class Pokedex:
                     midleft=(self.info_area_rect.left + 20, info_y_start + i * info_gap)
                 )
                 self.screen.blit(text, text_rect)
+
 
     def run(self):
         clock = pygame.time.Clock()
