@@ -21,7 +21,6 @@ pkmnsprites_directory = os.path.join(img_directory, "pkmnsprites")
 # DIRECTORY CONTAINING MUSIC
 music_directory = os.path.join(pokemon_directory, "music")
 
-
 # UTILITY FUNCTION FOR SELECTING SPRITES
 def select_sprites(sprite_name):
     if not isinstance(sprite_name, str):

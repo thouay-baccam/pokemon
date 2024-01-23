@@ -104,8 +104,12 @@ class NouvellePartie:
 
     def finish_and_close(self):
         self.save_player_data()
-        pygame.quit()
-        sys.exit()
+        self.launch_battle()
+
+    def launch_battle(self):
+        from .battle import Battle
+        battle = Battle()
+        battle.run()
 
     def save_player_data(self):
         player_data = {"nom": self.input_text}
