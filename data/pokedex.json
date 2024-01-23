@@ -1,11 +1,118 @@
-    [
-        {"name": "Bulbizarre", "region": "Kanto", "encountered": false},
-        {"name": "Herbizarre", "region": "Kanto", "encountered": false},
-        {"name": "Florizarre", "region": "Kanto", "encountered": false},
-        {"name": "Salameche", "region": "Kanto", "encountered": false},
-        {"name": "Reptincel", "region": "Kanto", "encountered": false},
-        {"name": "Dracaufeu", "region": "Kanto", "encountered": false},
-        {"name": "Carapuce", "region": "Kanto", "encountered": false},
-        {"name": "Carabaffe", "region": "Kanto", "encountered": false},
-        {"name": "Tortank", "region": "Kanto", "encountered": false}
-    ]
+[
+{
+        "name": "Bulbasaur",
+        "type": "Grass",
+        "type2": "Poison",
+        "moves": ["Quick Bash", "Guard Up", "Leaf Whip"],
+        "attack_stat": 49,
+        "defense_stat": 49,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Ivysaur",
+        "type": "Grass",
+        "type2": "Poison",
+        "moves": ["Quick Bash", "Guard Up", "Vine Lash"],
+        "attack_stat": 62,
+        "defense_stat": 63,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Venusaur",
+        "type": "Grass",
+        "type2": "Poison",
+        "moves": ["Quick Bash", "Guard Up", "Leaf Storm"],
+        "attack_stat": 82,
+        "defense_stat": 83,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Charmander",
+        "type": "Fire",
+        "moves": ["Quick Bash", "Guard Up", "Flame Tail"],
+        "attack_stat": 52,
+        "defense_stat": 43,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Charmeleon",
+        "type": "Fire",
+        "moves": ["Quick Bash", "Guard Up", "Fire Spin"],
+        "attack_stat": 64,
+        "defense_stat": 58,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Charizard",
+        "type": "Fire",
+        "type2": "Flying",
+        "moves": ["Quick Bash", "Guard Up", "Flame Burst"],
+        "attack_stat": 84,
+        "defense_stat": 78,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Squirtle",
+        "type": "Water",
+        "moves": ["Quick Bash", "Guard Up", "Water Gun"],
+        "attack_stat": 48,
+        "defense_stat": 65,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Wartortle",
+        "type": "Water",
+        "moves": ["Quick Bash", "Guard Up", "Bubble Beam"],
+        "attack_stat": 63,
+        "defense_stat": 80,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Blastoise",
+        "type": "Water",
+        "moves": ["Quick Bash", "Guard Up", "Hydro Pump"],
+        "attack_stat": 83,
+        "defense_stat": 100,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Caterpie",
+        "type": "Bug",
+        "moves": ["Quick Bash", "Guard Up", "String Shot"],
+        "attack_stat": 30,
+        "defense_stat": 35,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Metapod",
+        "type": "Bug",
+        "moves": ["Quick Bash", "Guard Up", "Harden"],
+        "attack_stat": 20,
+        "defense_stat": 55,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Butterfree",
+        "type": "Bug",
+        "type2": "Flying",
+        "moves": ["Quick Bash", "Guard Up", "Gust"],
+        "attack_stat": 45,
+        "defense_stat": 50,
+        "region": "Kanto",
+        "encountered": false
+    }
+]
+    
+    
+    
