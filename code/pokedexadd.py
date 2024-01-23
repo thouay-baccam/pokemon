@@ -9,6 +9,7 @@ from .file_paths import (
     backgrounds_directory,
     data_directory,
     pkmnsprites_directory,
+    music_directory
 )
 
 # Constantes pour les dimensions et les positions
@@ -33,6 +34,10 @@ class PokedexAdd:
         # Setting up the fonts
         self.text_font = pygame.font.Font(os.path.join(font_directory, "pkmn.ttf"), 24)
         self.input_font = pygame.font.Font(os.path.join(font_directory, "pkmn.ttf"), 18)
+
+        pygame.mixer.music.load(os.path.join(music_directory, "pokeadd.wav"))
+        pygame.mixer.music.set_volume(0.5)
+        pygame.mixer.music.play(-1)
 
         # Définition du rectangle de l'input field
         self.input_rect = pygame.Rect(

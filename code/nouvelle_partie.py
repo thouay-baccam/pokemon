@@ -44,6 +44,10 @@ class NouvellePartie:
             os.path.join(font_directory, "pkmn.ttf"), 40
         )
 
+        pygame.mixer.music.load(os.path.join(music_directory, "newgamemusic.wav"))
+        pygame.mixer.music.set_volume(0.5)
+        pygame.mixer.music.play(-1)
+
         # Définition du rectangle de l'input field
         self.input_rect = pygame.Rect(
             (self.window_size[0] - (self.window_size[0] * INPUT_RECT_WIDTH_PERCENTAGE))

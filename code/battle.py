@@ -1,6 +1,6 @@
 import pygame
 import os
-from .file_paths import backgrounds_directory, font_directory
+from .file_paths import backgrounds_directory, font_directory, music_directory
 
 # Constants for the window size and layout
 WINDOW_SIZE = (960, 600)
@@ -16,6 +16,10 @@ class Battle:
         # Load the new background image with the battle cards included
         self.bg_image = pygame.image.load(os.path.join(backgrounds_directory, "battlebg.png"))
         self.bg_image = pygame.transform.scale(self.bg_image, WINDOW_SIZE)
+
+        pygame.mixer.music.load(os.path.join(music_directory, "battle.wav"))
+        pygame.mixer.music.set_volume(0.5)
+        pygame.mixer.music.play(-1)
 
         # Font setup
         self.font = pygame.font.Font(os.path.join(font_directory, "pkmn.ttf"), FONT_SIZE)

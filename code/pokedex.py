@@ -35,6 +35,10 @@ class Pokedex:
         self.selected_pokemon_index = 0  # Index for the selected Pokémon
         self.sprites = self.load_pokemon_sprites()
 
+        pygame.mixer.music.load(os.path.join(music_directory, "pokedex.wav"))
+        pygame.mixer.music.set_volume(0.5)
+        pygame.mixer.music.play(-1)
+
         # Scroll variables
         self.scroll_y = 0
         self.scroll_speed = 30
