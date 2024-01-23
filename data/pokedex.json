@@ -302,7 +302,99 @@
         "defense_stat": 45,
         "region": "Kanto",
         "encountered": false
+    },
+    {
+        "name": "Abra",
+        "type_1": "11",
+        "moves": ["Quick Bash", "Guard Up", "Teleport"],
+        "attack_stat": 20,
+        "defense_stat": 15,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Alakazam",
+        "type_1": "11",
+        "moves": ["Quick Bash", "Guard Up", "Psybeam"],
+        "attack_stat": 50,
+        "defense_stat": 45,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Aron",
+        "type_1": "13",
+        "type_2": "9",
+        "moves": ["Quick Bash", "Guard Up", "Iron Tail"],
+        "attack_stat": 70,
+        "defense_stat": 100,
+        "region": "Hoenn",
+        "encountered": false
+    },
+    {
+        "name": "Kadabra",
+        "type_1": "11",
+        "moves": ["Quick Bash", "Guard Up", "Confusion"],
+        "attack_stat": 35,
+        "defense_stat": 30,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Machamp",
+        "type_1": "7",
+        "moves": ["Quick Bash", "Guard Up", "Karate Chop"],
+        "attack_stat": 130,
+        "defense_stat": 80,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Machoke",
+        "type_1": "7",
+        "moves": ["Quick Bash", "Guard Up", "Low Kick"],
+        "attack_stat": 80,
+        "defense_stat": 50,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Machop",
+        "type_1": "7",
+        "moves": ["Quick Bash", "Guard Up", "Karate Chop"],
+        "attack_stat": 50,
+        "defense_stat": 35,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Pichu",
+        "type_1": "4",
+        "moves": ["Quick Bash", "Guard Up", "Thunder Shock"],
+        "attack_stat": 40,
+        "defense_stat": 15,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Rattata",
+        "type_1": "1",
+        "moves": ["Quick Bash", "Guard Up", "Tackle"],
+        "attack_stat": 56,
+        "defense_stat": 35,
+        "region": "Kanto",
+        "encountered": false
+    },
+    {
+        "name": "Umbreon",
+        "type_1": "16",
+        "moves": ["Quick Bash", "Guard Up", "Faint Attack"],
+        "attack_stat": 65,
+        "defense_stat": 110,
+        "region": "Johto",
+        "encountered": false
     }
+    
 ]
     
     
