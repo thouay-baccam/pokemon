@@ -9,8 +9,7 @@ menu_principal_path = os.path.join(os.path.dirname(__file__), "menu_principal.py
 
 # DIRECTORY CONTAINING DATA FILES
 data_directory = os.path.join(pokemon_directory, "data")
-# FAUDRA RENOMMER LE FICHIER DE POKEDEX A POKEMON
-pokemon_path = os.path.join(data_directory, "pokedex.json")
+pokemon_path = os.path.join(data_directory, "pokemon.json")
 
 # DIRECTORY CONTAINING FONTS
 font_directory = os.path.join(pokemon_directory, "font")
