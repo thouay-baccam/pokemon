@@ -21,17 +21,9 @@ class Pokemon:
         self.defense = defense
 
         self.level = level
-        self.exp = exp
 
         self.front_sprite = front_sprite
         self.back_sprite = back_sprite
 
         self.evolution = evolution
         self.evolution_level = evolution_level
-
-    def gain_exp(self):
-        self.exp += 100
-        if not self.exp >= 100 * self.level:
-            return
-        self.exp = 0
-        self.level += 1
