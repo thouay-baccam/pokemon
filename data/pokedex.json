@@ -3,7 +3,6 @@
         "name": "Bulbasaur",
         "type_1": "5",
         "type_2": "8",
-        "moves": ["Attack", "Block"],
         "attack_stat": 49,
         "defense_stat": 49,
         "region": "Kanto",
@@ -13,7 +12,6 @@
         "name": "Ivysaur",
         "type_1": "5",
         "type_2": "8",
-        "moves": ["Attack", "Block"],
         "attack_stat": 62,
         "defense_stat": 63,
         "region": "Kanto",
@@ -23,7 +21,6 @@
         "name": "Venusaur",
         "type_1": "5",
         "type_2": "8",
-        "moves": ["Attack", "Block"],
         "attack_stat": 82,
         "defense_stat": 83,
         "region": "Kanto",
@@ -32,7 +29,6 @@
     {
         "name": "Charmander",
         "type_1": "2",
-        "moves": ["Attack", "Block"],
         "attack_stat": 52,
         "defense_stat": 43,
         "region": "Kanto",
@@ -41,7 +37,6 @@
     {
         "name": "Charmeleon",
         "type_1": "2",
-        "moves": ["Attack", "Block"],
         "attack_stat": 64,
         "defense_stat": 58,
         "region": "Kanto",
@@ -51,7 +46,6 @@
         "name": "Charizard",
         "type_1": "2",
         "type_2": "10",
-        "moves": ["Attack", "Block"],
         "attack_stat": 84,
         "defense_stat": 78,
         "region": "Kanto",
@@ -60,7 +54,6 @@
     {
         "name": "Squirtle",
         "type_1": "3",
-        "moves": ["Attack", "Block"],
         "attack_stat": 48,
         "defense_stat": 65,
         "region": "Kanto",
@@ -69,7 +62,6 @@
     {
         "name": "Wartortle",
         "type_1": "3",
-        "moves": ["Attack", "Block"],
         "attack_stat": 63,
         "defense_stat": 80,
         "region": "Kanto",
@@ -78,7 +70,6 @@
     {
         "name": "Blastoise",
         "type_1": "3",
-        "moves": ["Attack", "Block"],
         "attack_stat": 83,
         "defense_stat": 100,
         "region": "Kanto",
@@ -96,7 +87,6 @@
     {
         "name": "Metapod",
         "type_1": "12",
-        "moves": ["Attack", "Block"],
         "attack_stat": 20,
         "defense_stat": 55,
         "region": "Kanto",
@@ -106,7 +96,6 @@
         "name": "Butterfree",
         "type_1": "12",
         "type_2": "10",
-        "moves": ["Attack", "Block"],
         "attack_stat": 45,
         "defense_stat": 50,
         "region": "Kanto",
@@ -116,7 +105,6 @@
         "name": "Spearow",
         "type_1": "1",
         "type_2": "10",
-        "moves": ["Attack", "Block"],
         "attack_stat": 60,
         "defense_stat": 30,
         "region": "Kanto",
@@ -135,7 +123,6 @@
     {
         "name": "Ekans",
         "type_1": "8",
-        "moves": ["Attack", "Block"],
         "attack_stat": 60,
         "defense_stat": 44,
         "region": "Kanto",
@@ -144,7 +131,6 @@
     {
         "name": "Arbok",
         "type_1": "8",
-        "moves": ["Attack", "Block"],
         "attack_stat": 85,
         "defense_stat": 69,
         "region": "Kanto",
@@ -153,7 +139,6 @@
     {
         "name": "Pikachu",
         "type_1": "4",
-        "moves": ["Attack", "Block"],
         "attack_stat": 55,
         "defense_stat": 40,
         "region": "Kanto",
@@ -162,7 +147,6 @@
     {
         "name": "Raichu",
         "type_1": "4",
-        "moves": ["Attack", "Block"],
         "attack_stat": 90,
         "defense_stat": 55,
         "region": "Kanto",
@@ -172,7 +156,6 @@
         "name": "Aggron",
         "type_1": "17",
         "type_2": "13",
-        "moves": ["Attack", "Block"],
         "attack_stat": 110,
         "defense_stat": 180,
         "region": "Hoenn",
@@ -182,7 +165,6 @@
         "name": "Articuno",
         "type_1": "6",
         "type_2": "10",
-        "moves": ["Attack", "Block"],
         "attack_stat": 85,
         "defense_stat": 100,
         "region": "Kanto",
@@ -191,7 +173,6 @@
     {
         "name": "Diglett",
         "type_1": "9",
-        "moves": ["Attack", "Block"],
         "attack_stat": 55,
         "defense_stat": 25,
         "region": "Kanto",
@@ -200,7 +181,6 @@
     {
         "name": "Dragonair",
         "type_1": "15",
-        "moves": ["Attack", "Block"],
         "attack_stat": 84,
         "defense_stat": 65,
         "region": "Kanto",
@@ -210,7 +190,6 @@
         "name": "Dragonite",
         "type_1": "15",
         "type_2": "10",
-        "moves": ["Attack", "Block"],
         "attack_stat": 134,
         "defense_stat": 95,
         "region": "Kanto",
@@ -219,7 +198,6 @@
     {
         "name": "Dratini",
         "type_1": "15",
-        "moves": ["Attack", "Block"],
         "attack_stat": 64,
         "defense_stat": 45,
         "region": "Kanto",
@@ -228,7 +206,6 @@
     {
         "name": "Dugtrio",
         "type_1": "9",
-        "moves": ["Attack", "Block"],
         "attack_stat": 100,
         "defense_stat": 50,
         "region": "Kanto",
@@ -237,7 +214,6 @@
     {
         "name": "Eevee",
         "type_1": "1",
-        "moves": ["Attack", "Block"],
         "attack_stat": 55,
         "defense_stat": 50,
         "region": "Kanto",
@@ -247,7 +223,6 @@
         "name": "Gastly",
         "type_1": "14",
         "type_2": "4",
-        "moves": ["Attack", "Block"],
         "attack_stat": 35,
         "defense_stat": 30,
         "region": "Kanto",
@@ -257,7 +232,6 @@
         "name": "Gengar",
         "type_1": "14",
         "type_2": "4",
-        "moves": ["Attack", "Block"],
         "attack_stat": 65,
         "defense_stat": 60,
         "region": "Kanto",
@@ -267,7 +241,6 @@
         "name": "Geodude",
         "type_1": "13",
         "type_2": "9",
-        "moves": ["Attack", "Block"],
         "attack_stat": 80,
         "defense_stat": 100,
         "region": "Kanto",
@@ -277,7 +250,6 @@
         "name": "Golem",
         "type_1": "13",
         "type_2": "9",
-        "moves": ["Attack", "Block"],
         "attack_stat": 120,
         "defense_stat": 130,
         "region": "Kanto",
@@ -287,7 +259,6 @@
         "name": "Graveler",
         "type_1": "13",
         "type_2": "9",
-        "moves": ["Attack", "Block"],
         "attack_stat": 95,
         "defense_stat": 115,
         "region": "Kanto",
@@ -297,7 +268,6 @@
         "name": "Haunter",
         "type_1": "14",
         "type_2": "4",
-        "moves": ["Attack", "Block"],
         "attack_stat": 50,
         "defense_stat": 45,
         "region": "Kanto",
@@ -306,7 +276,6 @@
     {
         "name": "Abra",
         "type_1": "11",
-        "moves": ["Attack", "Block"],
         "attack_stat": 20,
         "defense_stat": 15,
         "region": "Kanto",
@@ -315,7 +284,6 @@
     {
         "name": "Alakazam",
         "type_1": "11",
-        "moves": ["Attack", "Block"],
         "attack_stat": 50,
         "defense_stat": 45,
         "region": "Kanto",
@@ -325,7 +293,6 @@
         "name": "Aron",
         "type_1": "13",
         "type_2": "9",
-        "moves": ["Attack", "Block"],
         "attack_stat": 70,
         "defense_stat": 100,
         "region": "Hoenn",
@@ -334,7 +301,6 @@
     {
         "name": "Kadabra",
         "type_1": "11",
-        "moves": ["Attack", "Block"],
         "attack_stat": 35,
         "defense_stat": 30,
         "region": "Kanto",
@@ -343,7 +309,6 @@
     {
         "name": "Machamp",
         "type_1": "7",
-        "moves": ["Attack", "Block"],
         "attack_stat": 130,
         "defense_stat": 80,
         "region": "Kanto",
@@ -352,7 +317,6 @@
     {
         "name": "Machoke",
         "type_1": "7",
-        "moves": ["Attack", "Block"],
         "attack_stat": 80,
         "defense_stat": 50,
         "region": "Kanto",
@@ -361,7 +325,6 @@
     {
         "name": "Machop",
         "type_1": "7",
-        "moves": ["Attack", "Block"],
         "attack_stat": 50,
         "defense_stat": 35,
         "region": "Kanto",
@@ -370,7 +333,6 @@
     {
         "name": "Pichu",
         "type_1": "4",
-        "moves": ["Attack", "Block"],
         "attack_stat": 40,
         "defense_stat": 15,
         "region": "Kanto",
@@ -379,7 +341,6 @@
     {
         "name": "Rattata",
         "type_1": "1",
-        "moves": ["Attack", "Block"],
         "attack_stat": 56,
         "defense_stat": 35,
         "region": "Kanto",
