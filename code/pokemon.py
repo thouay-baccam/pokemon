@@ -2,8 +2,7 @@ class Pokemon:
     def __init__(
         self,
         name,
-        type_1,
-        type_2,
+        types,
         health,
         attack,
         defense, 
@@ -16,12 +15,7 @@ class Pokemon:
         ):
         self.name = name
 
-        # 0=nil 1=nor 2=fir 3=wat 4=ele 5=gra
-        # 6=ice 7=fig 8=poi 9=gro 10=fly 11=psy
-        # 12=bug 13=roc 14=gho 15=dra 16=dark ste=17
-        self.type_1 = type_1
-        self.type_2 = type_2
-
+        self.types = types
         self.health = health
         self.attack = attack
         self.defense = defense
