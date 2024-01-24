@@ -1,7 +1,7 @@
 import pygame
 import os
 import sys
-from file_paths import (
+from .file_paths import (
     img_directory,
     backgrounds_directory,
     music_directory,
@@ -49,14 +49,14 @@ class MainMenu:
 
         # Boutons du menu
         self.buttons = [
-            {"text": "NOUVELLE PARTIE", "position": (self.window_size[0] // 2, 300)},
-            {"text": "CONTINUER", "position": (self.window_size[0] // 2, 330)},
+            {"text": "NEW GAME", "position": (self.window_size[0] // 2, 300)},
+            {"text": "CONTINUE ", "position": (self.window_size[0] // 2, 330)},
             {
                 "text": "POKEDEX",
                 "position": (self.window_size[0] // 2, 370),
             },  # New Pokédex button
-            {"text": "AJOUTER UN POKEMON", "position": (self.window_size[0] // 2, 410)},
-            {"text": "QUITTER", "position": (self.window_size[0] // 2, 450)},
+            {"text": "ADD A POKEMON", "position": (self.window_size[0] // 2, 410)},
+            {"text": "QUIT THE GAME", "position": (self.window_size[0] // 2, 450)},
         ]
 
     def handle_events(self):
@@ -89,14 +89,14 @@ class MainMenu:
                     self.button_clicked(self.buttons[self.selected_button]["text"])
 
     def button_clicked(self, button_text):
-        if button_text == "QUITTER":
+        if button_text == "QUIT THE GAME":
             pygame.quit()
             sys.exit()
-        elif button_text == "NOUVELLE PARTIE":
+        elif button_text == "NEW GAME":
             print("nouvelle partie")
         elif button_text == "POKEDEX":  # Handle Pokédex button click
             print("pokedex")
-        elif button_text == "AJOUTER UN POKEMON":  # Handle PokedexAdd button click
+        elif button_text == "ADD A POKEMON":  # Handle PokedexAdd button click
             print("pokemon add")
         else:
             print(f"CE BOUTON NE MARCHE PAS ENCORE: {button_text}")
