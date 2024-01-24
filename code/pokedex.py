@@ -5,7 +5,6 @@ import sys
 from .file_paths import (
     font_directory,
     music_directory,
-    img_directory,
     backgrounds_directory,
     data_directory,
     pkmnsprites_directory,
@@ -154,6 +153,7 @@ class Pokedex:
     def display_selected_pokemon_info(self):
         """Display information about the selected pokemon."""
         if self.selected_pokemon:
+            # Display the pokemon sprite
             pokemon_name = self.selected_pokemon["name"].lower()
             if pokemon_name in self.sprites:
                 sprite = self.sprites[pokemon_name]
@@ -163,37 +163,34 @@ class Pokedex:
                 )
                 self.screen.blit(sprite, sprite_rect)
 
-            info_y_start = self.info_area_rect.top + 240
-            info_gap = 30
-            name = f"Name: {self.selected_pokemon['name']}"
-            region = f"Region: {self.selected_pokemon['region']}"
-            encountered = (
-                f"Encountered: {'Yes' if self.selected_pokemon['encountered'] else 'No'}"
-            )
+            # Set a consistent horizontal margin for the left alignment of text
+            horizontal_margin = 20
 
-            # Add code to display types
-            types_text = "Type: "
-            type_1 = self.selected_pokemon["type_1"]
-            type_2 = self.selected_pokemon.get("type_2", None)
-
-            if type_1 in self.types:
-                types_text += self.types[type_1]
-            if type_2 in self.types:
-                types_text += " / " + self.types[type_2]
-
-            types = self.text_font.render(types_text, True, (0, 0, 0))
-            types_rect = types.get_rect(
-                midleft=(self.info_area_rect.left + 20, info_y_start + 3 * info_gap)
-            )
-            self.screen.blit(types, types_rect)
-
-            for i, info in enumerate([name, region, encountered]):
-                text = self.text_font.render(info, True, (0, 0, 0))
-                text_rect = text.get_rect(
-                    midleft=(self.info_area_rect.left + 20, info_y_start + i * info_gap)
-                )
-                self.screen.blit(text, text_rect)
-
+            # Adjust the starting y position higher up if needed
+            info_y_adjustment = 20
+            
+            # Calculate the vertical spacing based on the font size and desired line spacing
+            line_height = self.text_font.size('A')[1] + 5  # Height of the font + 5 pixels of spacing
+            
+            # Starting position for the information display
+            info_x = self.info_area_rect.left + horizontal_margin
+            info_y = self.info_area_rect.top + 240 - info_y_adjustment
+            
+            # Define the information to be displayed
+            info_texts = [
+                f"Name: {self.selected_pokemon['name']}",
+                f"Region: {self.selected_pokemon['region']}",
+                f"Encountered: {'Yes' if self.selected_pokemon['encountered'] else 'No'}",
+                f"Type: {self.types[self.selected_pokemon['type_1']]}" +
+                    (f" / {self.types[self.selected_pokemon['type_2']]}" if self.selected_pokemon.get("type_2") else ""),
+                f"Attack: {self.selected_pokemon['attack_stat']}",
+                f"Defense: {self.selected_pokemon['defense_stat']}"
+            ]
+            
+            # Render and blit each line of text
+            for i, text in enumerate(info_texts):
+                text_surface = self.text_font.render(text, True, (0, 0, 0))
+                self.screen.blit(text_surface, (info_x, info_y + i * line_height))
 
     def run(self):
         clock = pygame.time.Clock()
