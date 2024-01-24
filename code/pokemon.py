@@ -3,11 +3,9 @@ class Pokemon:
         self,
         name,
         types,
-        health,
         attack,
         defense, 
         level, 
-        exp, 
         front_sprite,
         back_sprite,
         evolution = None,
@@ -16,7 +14,7 @@ class Pokemon:
         self.name = name
 
         self.types = types
-        self.health = health
+        self.health = 20
         self.attack = attack
         self.defense = defense
 
