@@ -78,7 +78,6 @@
     {
         "name": "Caterpie",
         "type_1": "12",
-        "moves": ["Attack", "Block",],
         "attack_stat": 30,
         "defense_stat": 35,
         "region": "Kanto",
@@ -114,7 +113,6 @@
         "name": "Fearow",
         "type_1": "1",
         "type_2": "10",
-        "moves": ["Attack", "Block",],
         "attack_stat": 90,
         "defense_stat": 65,
         "region": "Kanto",
@@ -349,7 +347,6 @@
     {
         "name": "Umbreon",
         "type_1": "16",
-        "moves": ["Attack", "Block",],
         "attack_stat": 65,
         "defense_stat": 110,
         "region": "Johto",
