@@ -97,13 +97,13 @@
     },
     {
         "name": "Pikachu",
-        "type_1": "4,0",
+        "types": [4,0],
         "attack_stat": 55,
         "defense_stat": 40
     },
     {
         "name": "Raichu",
-        "type_1": "4,0",
+        "types": [4,0],
         "attack_stat": 90,
         "defense_stat": 55
     },
