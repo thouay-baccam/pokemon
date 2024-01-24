@@ -58,4 +58,23 @@ class Battle:
 
 if __name__ == "__main__":
     battle = Battle()
-    print(f"{battle.player_pokemon}\n{battle.enemy_pokemon}")
+    print(f"{battle.player_pokemon}\n{battle.enemy_pokemon}\n")
+
+    multipliers = []
+    for player_type in battle.player_pokemon["types"]:
+        for enemy_type in battle.enemy_pokemon["types"]:
+            multipliers.append(battle.type_chart[player_type][enemy_type])
+    attack_message = (
+        f"{battle.player_pokemon["name"]} attacks "
+        f"{battle.enemy_pokemon["name"]}\n"
+    )
+    damage = (battle.player_pokemon["attack_stat"]/battle.enemy_pokemon["defense_stat"])/50+2*max(multipliers)
+    
+    if max(multipliers) == 2:
+        print(f"{attack_message}It is very effective!\n{damage} DMG")
+    elif max(multipliers) == 1:
+        print(attack_message, f"{damage} DMG")
+    elif max(multipliers) == 0.5:
+        print(f"{attack_message}It's not very effective...\n{damage} DMG")
+    elif max(multipliers) == 0:
+        print(f"{attack_message}It doesn't do anything...\n{damage} DMG")
