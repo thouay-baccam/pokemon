@@ -1,10 +1,7 @@
 import pygame
 import os
 import sys
-from .nouvelle_partie import NouvellePartie
-from .pokedex import Pokedex
-from .pokedexadd import PokedexAdd
-from .file_paths import (
+from file_paths import (
     img_directory,
     backgrounds_directory,
     music_directory,
@@ -96,25 +93,13 @@ class MainMenu:
             pygame.quit()
             sys.exit()
         elif button_text == "NOUVELLE PARTIE":
-            self.run_nouvelle_partie()
+            print("nouvelle partie")
         elif button_text == "POKEDEX":  # Handle Pokédex button click
-            self.run_pokedex()
+            print("pokedex")
         elif button_text == "AJOUTER UN POKEMON":  # Handle PokedexAdd button click
-            self.run_pokedex_add()
+            print("pokemon add")
         else:
             print(f"CE BOUTON NE MARCHE PAS ENCORE: {button_text}")
-
-    def run_nouvelle_partie(self):
-        nouvelle_partie = NouvellePartie()
-        nouvelle_partie.run()
-
-    def run_pokedex(self):
-        pokedex = Pokedex(WINDOW_SIZE)
-        pokedex.run()
-
-    def run_pokedex_add(self):
-        pokedex_add = PokedexAdd()
-        pokedex_add.run()
 
     def run(self):
         clock = pygame.time.Clock()
@@ -171,5 +156,5 @@ class MainMenu:
 
 
 if __name__ == "__main__":
-    main_menu = MainMenu((800, 600))
+    main_menu = MainMenu()
     main_menu.run()
