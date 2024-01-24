@@ -38,14 +38,20 @@ class Battle:
                 print(index, pokemon['name'])
             while True:
                 choice = input("Choose a pokemon: ")
-                if not choice.isdigit():
-                    print("Il faut que le choix soit un nombre valide")
+                if not (choice.isdigit() and int(choice) <= len(pokemons)-1):
+                    print("The choice input has to be a valid number")
                     continue
-                if not int(choice) <= len(pokemons)-1:
-                    print("Nombre invalide")
-                    continue
-                print(f"Vous avez choisi {pokemons[int(choice)]['name']}")
-                return pokemons[int(choice)]
+                chosen_pokemon = pokemons[int(choice)]
+                print(f"You have chosen {chosen_pokemon['name']}\n")
+                return Pokemon(
+                    chosen_pokemon['name'],
+                    chosen_pokemon['types'],
+                    chosen_pokemon['attack_stat'],
+                    chosen_pokemon['defense_stat'],
+                    5,
+                    "nothing.jpg",
+                    "go-away.jpg"
+                )
 
     def random_pokemon(self):
         with open(pokemon_path, "r") as file:
@@ -53,28 +59,71 @@ class Battle:
             for pokemon in pokemons:
                 pokemon["types"] = tuple(pokemon["types"])
             enemy_pokemon = choice(pokemons)
-            return enemy_pokemon
+            return Pokemon(
+                enemy_pokemon['name'],
+                enemy_pokemon['types'],
+                enemy_pokemon['attack_stat'],
+                enemy_pokemon['defense_stat'],
+                5,
+                "nothing.jpg",
+                "go-away.jpg"
+            )
 
+    def print_status(self, pokemon):
+        print(
+            f"NAME: {pokemon.name}\n"
+            f"HP: {pokemon.health}\n"
+            f"TYPES: {pokemon.types}\n"
+            f"ATK: {pokemon.attack}\n"
+            f"DEF: {pokemon.defense}\n"
+            f"LVL: {pokemon.level}\n"
+        )
 
+    def attack(self, attacker, target):
+        multipliers = []
+        for attacker_type in attacker.types:
+            for target_type in target.types:
+                multipliers.append(self.type_chart[attacker_type][target_type])
+
+        hit_chance = choice(range(0, 4)) 
+        if hit_chance > 0:
+            multiplier = max(multipliers)
+        else:
+            multiplier = 0
+        damage = (attacker.attack/target.defense)/50+2*multiplier
+        damage = int(damage)
+        target.health -= damage
+
+        attack_message = (
+            f"{attacker.name} attacks "
+            f"{target.name}\n"
+        )
+        messages = {
+            2:f"{attack_message}It is very effective!\n{damage} DMG\n",
+            1:f"{attack_message}{damage} DMG\n",
+            0.5:f"{attack_message}It's not very effective...\n{damage} DMG\n",
+            0:f"{attack_message}It missed!\n{damage} DMG\n"
+        }
+        print(messages[multiplier])
+    
+
+# Faudra mettre ça dans __init__ eventuellement
 if __name__ == "__main__":
     battle = Battle()
-    print(f"{battle.player_pokemon}\n{battle.enemy_pokemon}\n")
 
-    multipliers = []
-    for player_type in battle.player_pokemon["types"]:
-        for enemy_type in battle.enemy_pokemon["types"]:
-            multipliers.append(battle.type_chart[player_type][enemy_type])
-    attack_message = (
-        f"{battle.player_pokemon["name"]} attacks "
-        f"{battle.enemy_pokemon["name"]}\n"
-    )
-    damage = (battle.player_pokemon["attack_stat"]/battle.enemy_pokemon["defense_stat"])/50+2*max(multipliers)
-    
-    if max(multipliers) == 2:
-        print(f"{attack_message}It is very effective!\n{damage} DMG")
-    elif max(multipliers) == 1:
-        print(attack_message, f"{damage} DMG")
-    elif max(multipliers) == 0.5:
-        print(f"{attack_message}It's not very effective...\n{damage} DMG")
-    elif max(multipliers) == 0:
-        print(f"{attack_message}It doesn't do anything...\n{damage} DMG")
+    while battle.player_pokemon.health > 0 and battle.enemy_pokemon.health > 0:
+        battle.print_status(battle.player_pokemon)
+        battle.print_status(battle.enemy_pokemon)
+        battle.attack(battle.player_pokemon, battle.enemy_pokemon)
+
+        battle.print_status(battle.player_pokemon)
+        battle.print_status(battle.enemy_pokemon)
+        battle.attack(battle.enemy_pokemon, battle.player_pokemon)
+
+    battle.print_status(battle.player_pokemon)
+    battle.print_status(battle.enemy_pokemon)
+
+    if battle.enemy_pokemon.health <= 0:
+        print("The player's Pokemon has won")
+    else:
+        print("The player's Pokemon has lost")
