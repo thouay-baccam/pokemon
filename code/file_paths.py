@@ -10,6 +10,7 @@ menu_principal_path = os.path.join(os.path.dirname(__file__), "menu_principal.py
 # DIRECTORY CONTAINING DATA FILES
 data_directory = os.path.join(pokemon_directory, "data")
 pokemon_path = os.path.join(data_directory, "pokemon.json")
+save_path = os.path.join(data_directory, "save.json")
 
 # DIRECTORY CONTAINING FONTS
 font_directory = os.path.join(pokemon_directory, "font")
