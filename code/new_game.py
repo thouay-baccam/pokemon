@@ -40,7 +40,3 @@ class NewGame:
 
         with open(save_path, "w") as file:
             json.dump(new_save, file, indent=4)
-
-
-if __name__ == "__main__":
-    new_game = NewGame()
