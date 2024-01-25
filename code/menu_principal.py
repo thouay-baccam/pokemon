@@ -1,8 +1,8 @@
 import pygame
 import os
 import sys
-from .pokemonadd import PokemonAdd
-from .file_paths import (
+from pokemonadd import PokemonAdd
+from file_paths import (
     img_directory,
     backgrounds_directory,
     music_directory,

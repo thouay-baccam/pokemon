@@ -29,7 +29,6 @@ class Battle:
             (0,1,1,1,1,1,1,0.5,1,1,1,2,1,1,2,1,0.5,0.5),
             (0,1,0.5,0.5,0.5,1,2,1,1,1,1,1,1,2,1,1,1,0.5)
         )
-
     def choose_pokemon(self):
         with open(pokemon_path, "r") as file:
             pokemons = json.load(file)
@@ -37,21 +36,24 @@ class Battle:
                 pokemon["types"] = tuple(pokemon["types"])
                 print(index, pokemon['name'])
             while True:
-                choice = input("Choose a pokemon: ")
-                if not (choice.isdigit() and int(choice) <= len(pokemons)-1):
+                choice_input = input("Choose a pokemon: ")  # Changed variable name to avoid confusion with 'choice' module
+                if not (choice_input.isdigit() and int(choice_input) <= len(pokemons)-1):
                     print("The choice input has to be a valid number")
                     continue
-                chosen_pokemon = pokemons[int(choice)]
+                chosen_pokemon = pokemons[int(choice_input)]
                 print(f"You have chosen {chosen_pokemon['name']}\n")
                 return Pokemon(
                     chosen_pokemon['name'],
                     chosen_pokemon['types'],
                     chosen_pokemon['attack_stat'],
                     chosen_pokemon['defense_stat'],
-                    5,
+                    29,  # Starting level, you can adjust this as needed
                     "nothing.jpg",
-                    "go-away.jpg"
+                    "go-away.jpg",
+                    evolution=chosen_pokemon.get('evolution'),  # Include evolution details
+                    evolution_level=chosen_pokemon.get('evolution_level')  # Include evolution level
                 )
+
 
     def random_pokemon(self):
         with open(pokemon_path, "r") as file:
@@ -123,7 +125,9 @@ if __name__ == "__main__":
     battle.print_status(battle.player_pokemon)
     battle.print_status(battle.enemy_pokemon)
 
+    # At the end of the battle, if the player's Pokemon wins
     if battle.enemy_pokemon.health <= 0:
         print("The player's Pokemon has won")
+        battle.player_pokemon.level_up()    
     else:
         print("The player's Pokemon has lost")
