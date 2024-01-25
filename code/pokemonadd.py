@@ -4,7 +4,7 @@ import json
 import shutil
 from tkinter import filedialog
 from tkinter import Tk
-from file_paths import (
+from .file_paths import (
     backgrounds_directory,
     music_directory,
     font_directory,
@@ -18,7 +18,7 @@ WINDOW_SIZE = (800, 600)
 INPUT_BOX_WIDTH = 140
 INPUT_BOX_HEIGHT = 32
 FONT_SIZE = 24
-BUTTON_SIZE = (200, 50)
+BUTTON_SIZE = (300, 50)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
@@ -90,6 +90,8 @@ class PokemonAdd:
             self.screen.blit(label_surface, label_rect)
 
     def handle_events(self):
+        MAX_NAME_LENGTH = 10  # Set the maximum length for the name input
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return False
@@ -110,12 +112,13 @@ class PokemonAdd:
                     elif event.key == pygame.K_RETURN:
                         self.active_input = None  # Deselect input box when enter is pressed
                     else:
+                        if self.active_input == 'name' and len(self.input_data['name']) >= MAX_NAME_LENGTH:
+                            # If the maximum length is reached, don't add more characters
+                            continue
                         self.input_data[self.active_input] += event.unicode
-                        # Ensure the input does not exceed the maximum length
-                        if self.active_input in ['atk', 'def']:
-                            self.input_data[self.active_input] = self.input_data[self.active_input][:3]
 
         return True
+
     
     def handle_click(self, position):
         # Check if any of the buttons were clicked
