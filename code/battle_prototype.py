@@ -49,11 +49,11 @@ class Battle:
                     chosen_pokemon['types'],
                     chosen_pokemon['attack_stat'],
                     chosen_pokemon['defense_stat'],
-                    5,  # Starting level, you can adjust this as needed
+                    chosen_pokemon['level'],
                     "nothing.jpg",
                     "go-away.jpg",
-                    evolution=chosen_pokemon.get('evolution'),  # Include evolution details
-                    evolution_level=chosen_pokemon.get('evolution_level')  # Include evolution level
+                    evolution=chosen_pokemon['evolution'],  # Include evolution details
+                    evolution_level=chosen_pokemon['evolution_level']  # Include evolution level
                 )
 
 

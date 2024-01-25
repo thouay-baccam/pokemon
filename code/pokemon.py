@@ -1,7 +1,7 @@
 import json
-from file_paths import (
-    pokemon_path
-)
+
+from file_paths import pokemon_path, save_path
+
 
 class Pokemon:
     def __init__(
@@ -33,6 +33,14 @@ class Pokemon:
 
     def level_up(self):
         self.level += 1
+        pokemons = []
+        with open(save_path, "r") as file:
+            pokemons = json.load(file)
+            for pokemon in pokemons:
+                if pokemon['name'] == self.name:
+                    pokemon['level'] = self.level
+        with open(save_path, "w") as file:
+            json.dump(pokemons, file, indent=4)
         print(f"{self.name} has leveled up! It is now level {self.level}.")
         self.check_evolution()
 
