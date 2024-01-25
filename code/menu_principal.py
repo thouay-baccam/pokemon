@@ -1,6 +1,7 @@
 import pygame
 import os
 import sys
+from .pokemonadd import PokemonAdd
 from .file_paths import (
     img_directory,
     backgrounds_directory,
@@ -59,6 +60,10 @@ class MainMenu:
             {"text": "QUIT THE GAME", "position": (self.window_size[0] // 2, 450)},
         ]
 
+    def run_pokemonadd(self):
+        pokemonadd = PokemonAdd()
+        pokemonadd.run()
+
     def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -97,7 +102,7 @@ class MainMenu:
         elif button_text == "POKEDEX":  # Handle Pokédex button click
             print("pokedex")
         elif button_text == "ADD A POKEMON":  # Handle PokedexAdd button click
-            print("pokemon add")
+            self.run_pokemonadd()
         else:
             print(f"CE BOUTON NE MARCHE PAS ENCORE: {button_text}")
 
