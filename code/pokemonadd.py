@@ -4,7 +4,7 @@ import json
 import shutil
 from tkinter import filedialog
 from tkinter import Tk
-from .file_paths import (
+from file_paths import (
     backgrounds_directory,
     music_directory,
     font_directory,
