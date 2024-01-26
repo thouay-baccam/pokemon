@@ -1,29 +1,31 @@
 import os
 
-# MAIN DIRECTORY
+
+# Répertoire principale
 pokemon_directory = os.path.abspath(os.path.join(__file__, os.pardir, os.pardir))
 
-# DIRECTORY CONTAINING CODE
+# Répertoire contenant code
 code_directory = os.path.join(pokemon_directory, "code")
-menu_principal_path = os.path.join(os.path.dirname(__file__), "menu_principal.py")
 
-# DIRECTORY CONTAINING DATA FILES
+# Répertoire contenant données
 data_directory = os.path.join(pokemon_directory, "data")
 pokemon_path = os.path.join(data_directory, "pokemon.json")
+pokedex_path = os.path.join(data_directory, "pokedex.json")
 save_path = os.path.join(data_directory, "save.json")
 
-# DIRECTORY CONTAINING FONTS
+# Répertoire contenant police
 font_directory = os.path.join(pokemon_directory, "font")
 
-# DIRECTORY CONTAINING IMAGES
+# Répertoire contenant images
 img_directory = os.path.join(pokemon_directory, "img")
 backgrounds_directory = os.path.join(img_directory, "backgrounds")
 pkmnsprites_directory = os.path.join(img_directory, "pkmnsprites")
 
-# DIRECTORY CONTAINING MUSIC
+# Répertoire contenant musique
 music_directory = os.path.join(pokemon_directory, "music")
 
-# UTILITY FUNCTION FOR SELECTING SPRITES
+
+# Fonction pour obtenir chemin vers image sprite.
 def select_sprites(sprite_name):
     if not isinstance(sprite_name, str):
         raise ValueError("Le nom du fichier doit être un string")
