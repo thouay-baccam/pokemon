@@ -114,7 +114,9 @@ class NewGame:
             json.dump(new_save, file, indent=4)
 
     def start_combat(self):
-        Combat()
+        with open(save_path, "r") as file:
+            pokemons = json.load(file)
+        Combat(pokemons[0])
 
     def is_save_file_non_empty(self):
         return exists(save_path) and os.path.getsize(save_path) > 0
