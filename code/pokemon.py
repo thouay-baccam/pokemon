@@ -6,30 +6,23 @@ from file_paths import pokemon_path, save_path
 class Pokemon:
     def __init__(
         self,
-        name,
-        types,
-        attack,
-        defense,
-        level,
-        front_sprite,
-        back_sprite,
-        evolution=None,
-        evolution_level=None,
+        stat_dict
     ):
-        self.name = name
+        self.name = stat_dict['name']
 
-        self.types = types
+        self.types = stat_dict['types']
         self.health = 20
-        self.attack = attack
-        self.defense = defense
+        self.attack = stat_dict['attack_stat']
+        self.defense = stat_dict['defense_stat']
 
-        self.level = level
+        self.level = stat_dict['level']
 
-        self.front_sprite = front_sprite
-        self.back_sprite = back_sprite
+        self.front_sprite = "ejaieazjieazijeiazj"
+        self.back_sprite = "cxjwklcwxnkxwn"
 
-        self.evolution = evolution
-        self.evolution_level = evolution_level
+        if ("evolution" and "evolution_level") in stat_dict:
+            self.evolution = stat_dict['evolution']
+            self.evolution_level = stat_dict['evolution_level']
 
     # Méthode pour changer de niveau
     def level_up(self):
