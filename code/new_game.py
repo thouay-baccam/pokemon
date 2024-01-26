@@ -131,11 +131,11 @@ class NewGame:
                         else:
                             self.create_save(self.current_selection)
                             self.start_combat()
-                    elif clicked_button == "yes":
+                    elif clicked_button == "YES":
                         self.show_popup = False
                         self.create_save(self.current_selection)
                         self.start_combat()
-                    elif clicked_button == "no":
+                    elif clicked_button == "NO":
                         self.show_popup = False
 
             self.draw_pokemon_sprites()
