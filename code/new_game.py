@@ -2,7 +2,15 @@ import os
 import pygame
 import json
 from os.path import exists
-from file_paths import pokemon_path, save_path, pkmnsprites_directory, backgrounds_directory, font_directory, music_directory
+from file_paths import (
+    pokedex_path,
+    pokemon_path,
+    save_path,
+    pkmnsprites_directory,
+    backgrounds_directory,
+    font_directory,
+    music_directory
+)
 from combat import Combat
 
 class NewGame:
@@ -99,6 +107,8 @@ class NewGame:
 
     def create_save(self, pokemon_index):
         new_save = [self.pokemons[pokemon_index]]
+        with open(pokedex_path, "w") as file:
+            json.dump(new_save, file, indent=4)
         new_save[0]["level"] = 5  
         with open(save_path, "w") as file:
             json.dump(new_save, file, indent=4)

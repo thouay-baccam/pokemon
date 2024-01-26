@@ -1,0 +1,13 @@
+[
+    {
+        "name": "Bulbasaur",
+        "types": [
+            5,
+            8
+        ],
+        "attack_stat": 49,
+        "defense_stat": 49,
+        "evolution": "Ivysaur",
+        "evolution_level": 15
+    }
+]
