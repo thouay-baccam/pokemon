@@ -5,8 +5,8 @@ from file_paths import save_path, pokemon_path
 from pokemon import Pokemon
 
 
-class Battle:
-    def __init__(self):
+class Combat:
+    def __init__(self, player_pokemon):
         self.type_chart = (
             (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0),
             (0,1,1,1,1,1,1,1,1,1,1,1,1,0.5,0,1,1,0.5),
@@ -27,35 +27,9 @@ class Battle:
             (0,1,1,1,1,1,1,0.5,1,1,1,2,1,1,2,1,0.5,0.5),
             (0,1,0.5,0.5,0.5,1,2,1,1,1,1,1,1,2,1,1,1,0.5)
         )
-        self.player_pokemon = self.choose_pokemon()
+        self.player_pokemon = player_pokemon
         self.enemy_pokemon = self.random_pokemon()
         self.battle()
-
-    def choose_pokemon(self):
-        with open(save_path, "r") as file:
-            pokemons = json.load(file)
-            for index, pokemon in enumerate(pokemons):
-                pokemon["types"] = tuple(pokemon["types"])
-                print(index, pokemon['name'])
-            while True:
-                choice_input = input("Choose a pokemon: ")  # Changed variable name to avoid confusion with 'choice' module
-                if not (choice_input.isdigit() and int(choice_input) <= len(pokemons)-1):
-                    print("The choice input has to be a valid number")
-                    continue
-                chosen_pokemon = pokemons[int(choice_input)]
-                print(f"You have chosen {chosen_pokemon['name']}\n")
-                return Pokemon(
-                    chosen_pokemon['name'],
-                    chosen_pokemon['types'],
-                    chosen_pokemon['attack_stat'],
-                    chosen_pokemon['defense_stat'],
-                    chosen_pokemon['level'],
-                    "nothing.jpg",
-                    "go-away.jpg",
-                    evolution=chosen_pokemon['evolution'],  # Include evolution details
-                    evolution_level=chosen_pokemon['evolution_level']  # Include evolution level
-                )
-
 
     def random_pokemon(self):
         with open(pokemon_path, "r") as file:
