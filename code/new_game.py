@@ -2,7 +2,7 @@ import os
 import pygame
 import json
 from os.path import exists
-from file_paths import pokemon_path, save_path, pkmnsprites_directory, backgrounds_directory
+from file_paths import pokemon_path, save_path, pkmnsprites_directory, backgrounds_directory, font_directory
 from combat import Combat
 
 class NewGame:
@@ -11,10 +11,14 @@ class NewGame:
         self.screen = pygame.display.set_mode((800, 600))
         pygame.display.set_caption("New Game - Pokemon La Plateforme")
 
+        # Load the custom font
+        self.custom_font_path = os.path.join(font_directory, "pkmn.ttf")
+        self.font = pygame.font.Font(self.custom_font_path, 16)
+        self.button_font = pygame.font.Font(self.custom_font_path, 11)
+
         self.load_data()
         self.load_sprites()
 
-        self.font = pygame.font.Font(None, 36)
         self.current_selection = 0
         self.running = True
         self.show_popup = False
@@ -22,13 +26,12 @@ class NewGame:
         self.background = pygame.image.load(os.path.join(backgrounds_directory, "newgame.jpg"))
         self.background = pygame.transform.scale(self.background, (800, 600))
 
-        self.button_font = pygame.font.Font(None, 28)
         self.buttons = {
-            "left": pygame.Rect(100, 550, 100, 40),
-            "right": pygame.Rect(600, 550, 100, 40),
-            "confirm": pygame.Rect(350, 550, 100, 40),
-            "yes": pygame.Rect(250, 300, 100, 40),
-            "no": pygame.Rect(450, 300, 100, 40)
+            "PREVIOUS": pygame.Rect(220, 230, 100, 40),  # Adjusted position
+            "NEXT": pygame.Rect(480, 230, 100, 40),  # Adjusted position
+            "CONFIRM": pygame.Rect(350, 300, 100, 40),  # Adjusted position
+            "YES": pygame.Rect(250, 300, 100, 40),  # Unchanged position
+            "NO": pygame.Rect(450, 300, 100, 40)  # Unchanged position
         }
 
     def load_data(self):
@@ -69,7 +72,7 @@ class NewGame:
             self.screen.blit(message_text, message_rect)
 
             # Draw Yes/No buttons
-            for button_text in ["yes", "no"]:
+            for button_text in ["YES", "NO"]:
                 button_rect = self.buttons[button_text]
                 pygame.draw.rect(self.screen, (180, 180, 180), button_rect)
                 text_surf = self.button_font.render(button_text, True, (0, 0, 0))
@@ -77,18 +80,16 @@ class NewGame:
                 self.screen.blit(text_surf, text_rect)
 
     def draw_buttons(self):
-        # Always draw navigation and confirm buttons
-        for button_text in ["left", "right", "confirm"]:
-            button_rect = self.buttons[button_text]
-            pygame.draw.rect(self.screen, (180, 180, 180), button_rect)
-            text_surf = self.button_font.render(button_text, True, (0, 0, 0))
-            text_rect = text_surf.get_rect(center=button_rect.center)
-            self.screen.blit(text_surf, text_rect)
-
-        # Draw Yes/No buttons only if show_popup is True
-        if self.show_popup:
-            for button_text in ["yes", "no"]:
-                button_rect = self.buttons[button_text]
+        # Draw navigation and CONFIRM buttons based on the new layout
+        for button_text, button_rect in self.buttons.items():
+            if self.show_popup and button_text in ["YES", "NO"]:
+                # If the popup is showing, only draw the YES and NO buttons
+                pygame.draw.rect(self.screen, (180, 180, 180), button_rect)
+                text_surf = self.font.render(button_text, True, (0, 0, 0))
+                text_rect = text_surf.get_rect(center=button_rect.center)
+                self.screen.blit(text_surf, text_rect)
+            elif not self.show_popup and button_text in ["PREVIOUS", "NEXT", "CONFIRM"]:
+                # Otherwise, draw the navigation and CONFIRM buttons
                 pygame.draw.rect(self.screen, (180, 180, 180), button_rect)
                 text_surf = self.button_font.render(button_text, True, (0, 0, 0))
                 text_rect = text_surf.get_rect(center=button_rect.center)
@@ -121,11 +122,11 @@ class NewGame:
                     self.running = False
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     clicked_button = self.handle_button_click(event.pos)
-                    if clicked_button == "left":
+                    if clicked_button == "PREVIOUS":
                         self.current_selection = (self.current_selection - 1) % len(self.pokemon_names)
-                    elif clicked_button == "right":
+                    elif clicked_button == "NEXT":
                         self.current_selection = (self.current_selection + 1) % len(self.pokemon_names)
-                    elif clicked_button == "confirm":
+                    elif clicked_button == "CONFIRM":
                         if self.is_save_file_non_empty():
                             self.show_popup = True
                         else:
