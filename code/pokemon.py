@@ -78,5 +78,6 @@ class Pokemon:
             for pokemon in pokemons:
                 if pokemon["name"] == self.name:
                     pokemon = data
+                    pokemon['level'] = self.level
         with open(save_path, "w") as file:
             json.dump(pokemons, file, indent=4)
