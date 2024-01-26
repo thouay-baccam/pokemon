@@ -2,7 +2,7 @@ import os
 import pygame
 import json
 from os.path import exists
-from file_paths import pokemon_path, save_path, pkmnsprites_directory, backgrounds_directory, font_directory
+from file_paths import pokemon_path, save_path, pkmnsprites_directory, backgrounds_directory, font_directory, music_directory
 from combat import Combat
 
 class NewGame:
@@ -11,7 +11,6 @@ class NewGame:
         self.screen = pygame.display.set_mode((800, 600))
         pygame.display.set_caption("New Game - Pokemon La Plateforme")
 
-        # Load the custom font
         self.custom_font_path = os.path.join(font_directory, "pkmn.ttf")
         self.font = pygame.font.Font(self.custom_font_path, 16)
         self.button_font = pygame.font.Font(self.custom_font_path, 11)
@@ -26,12 +25,17 @@ class NewGame:
         self.background = pygame.image.load(os.path.join(backgrounds_directory, "newgame.jpg"))
         self.background = pygame.transform.scale(self.background, (800, 600))
 
+        pygame.mixer.music.load(os.path.join(music_directory, "newgamemusic.wav"))
+        pygame.mixer.music.set_volume(0.5)
+        pygame.mixer.music.play(-1)
+
+
         self.buttons = {
-            "PREVIOUS": pygame.Rect(220, 230, 100, 40),  # Adjusted position
-            "NEXT": pygame.Rect(480, 230, 100, 40),  # Adjusted position
-            "CONFIRM": pygame.Rect(350, 300, 100, 40),  # Adjusted position
-            "YES": pygame.Rect(250, 300, 100, 40),  # Unchanged position
-            "NO": pygame.Rect(450, 300, 100, 40)  # Unchanged position
+            "PREVIOUS": pygame.Rect(220 - 10, 230 - 10, 120, 60),  
+            "NEXT": pygame.Rect(480 - 10, 230 - 10, 120, 60),  
+            "CONFIRM": pygame.Rect(350 - 10, 300 - 10, 120, 60),  
+            "YES": pygame.Rect(250 - 10, 300 - 10, 120, 60),  
+            "NO": pygame.Rect(450 - 10, 300 - 10, 120, 60)  
         }
 
     def load_data(self):
@@ -62,16 +66,11 @@ class NewGame:
 
     def draw_popup(self):
         if self.show_popup:
-            # Draw the popup box
             popup_rect = pygame.Rect(200, 200, 400, 200)
             pygame.draw.rect(self.screen, (200, 200, 200), popup_rect)
-
-            # Draw the "Overwrite current save?" text
             message_text = self.font.render("Overwrite current save?", True, (0, 0, 0))
             message_rect = message_text.get_rect(center=(400, 250))
             self.screen.blit(message_text, message_rect)
-
-            # Draw Yes/No buttons
             for button_text in ["YES", "NO"]:
                 button_rect = self.buttons[button_text]
                 pygame.draw.rect(self.screen, (180, 180, 180), button_rect)
@@ -80,16 +79,13 @@ class NewGame:
                 self.screen.blit(text_surf, text_rect)
 
     def draw_buttons(self):
-        # Draw navigation and CONFIRM buttons based on the new layout
         for button_text, button_rect in self.buttons.items():
             if self.show_popup and button_text in ["YES", "NO"]:
-                # If the popup is showing, only draw the YES and NO buttons
                 pygame.draw.rect(self.screen, (180, 180, 180), button_rect)
                 text_surf = self.font.render(button_text, True, (0, 0, 0))
                 text_rect = text_surf.get_rect(center=button_rect.center)
                 self.screen.blit(text_surf, text_rect)
             elif not self.show_popup and button_text in ["PREVIOUS", "NEXT", "CONFIRM"]:
-                # Otherwise, draw the navigation and CONFIRM buttons
                 pygame.draw.rect(self.screen, (180, 180, 180), button_rect)
                 text_surf = self.button_font.render(button_text, True, (0, 0, 0))
                 text_rect = text_surf.get_rect(center=button_rect.center)
@@ -114,9 +110,12 @@ class NewGame:
         return exists(save_path) and os.path.getsize(save_path) > 0
 
     def run(self):
+        title_text = self.font.render("CHOOSE YOUR POKEMON !", True, (0, 0, 0))  
+        title_rect = title_text.get_rect(center=(self.screen.get_width() // 2, 100))  
+
         while self.running:
             self.screen.blit(self.background, (0, 0))
-
+            self.screen.blit(title_text, title_rect)  
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
