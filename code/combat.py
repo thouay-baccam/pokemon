@@ -1,7 +1,7 @@
 import json
 from random import choice
 
-from file_paths import save_path, pokemon_path
+from file_paths import save_path, pokemon_path, pokedex_path
 from pokemon import Pokemon
 
 
@@ -49,16 +49,22 @@ class Combat:
                 # Conversion array JSON en tuple Python
                 pokemon["types"] = tuple(pokemon["types"])
             enemy_pokemon = choice(pokemons)
-            return Pokemon(
-                enemy_pokemon["name"],
-                enemy_pokemon["types"],
-                enemy_pokemon["attack_stat"],
-                enemy_pokemon["defense_stat"],
-                self.player_pokemon.level,
-                # Utiliser select_sprites dans file_path
-                "nothing.jpg",
-                "go-away.jpg",
-            )
+        with open(pokedex_path, "r") as file:
+            pokedex = json.load(file)
+            if not enemy_pokemon in pokedex:
+                pokedex.append(enemy_pokemon)
+            with open(pokedex_path, "w") as file:
+                json.dump(pokedex, file, indent=4)
+        return Pokemon(
+            enemy_pokemon["name"],
+            enemy_pokemon["types"],
+            enemy_pokemon["attack_stat"],
+            enemy_pokemon["defense_stat"],
+            self.player_pokemon.level,
+            # Utiliser select_sprites dans file_path
+            "nothing.jpg",
+            "go-away.jpg",
+        )
 
     # Eventuellement, on aura plus besoin des prints dans les méthodes
     def print_status(self, pokemon):

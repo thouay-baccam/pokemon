@@ -1,37 +1,13 @@
 [
     {
-        "name": "Ivysaur",
+        "name": "Bulbasaur",
         "types": [
             5,
             8
         ],
-        "attack_stat": 62,
-        "defense_stat": 63,
-        "evolution": "Venusaur",
-        "evolution_level": 30,
-        "level": 15
-    },
-    {
-        "name": "Charmander",
-        "types": [
-            2,
-            0
-        ],
-        "attack_stat": 52,
-        "defense_stat": 43,
-        "evolution": "Charmeleon",
-        "evolution_level": 15,
-        "level": 5
-    },
-    {
-        "name": "Squirtle",
-        "types": [
-            3,
-            0
-        ],
-        "attack_stat": 48,
-        "defense_stat": 65,
-        "evolution": "Wartortle",
+        "attack_stat": 49,
+        "defense_stat": 49,
+        "evolution": "Ivysaur",
         "evolution_level": 15,
         "level": 5
     }
