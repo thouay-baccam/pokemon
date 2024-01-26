@@ -9,5 +9,14 @@
         "defense_stat": 49,
         "evolution": "Ivysaur",
         "evolution_level": 15
+    },
+    {
+        "name": "Umbreon",
+        "types": [
+            16,
+            0
+        ],
+        "attack_stat": 65,
+        "defense_stat": 110
     }
 ]

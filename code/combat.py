@@ -37,7 +37,7 @@ class Combat:
         )
         # fmt: on
 
-        self.player_pokemon = player_pokemon
+        self.player_pokemon = Pokemon(player_pokemon)
         self.enemy_pokemon = self.random_pokemon()
         self.battle()
 
@@ -55,16 +55,8 @@ class Combat:
                 pokedex.append(enemy_pokemon)
             with open(pokedex_path, "w") as file:
                 json.dump(pokedex, file, indent=4)
-        return Pokemon(
-            enemy_pokemon["name"],
-            enemy_pokemon["types"],
-            enemy_pokemon["attack_stat"],
-            enemy_pokemon["defense_stat"],
-            self.player_pokemon.level,
-            # Utiliser select_sprites dans file_path
-            "nothing.jpg",
-            "go-away.jpg",
-        )
+            enemy_pokemon['level'] = self.player_pokemon.level
+        return Pokemon(enemy_pokemon)
 
     # Eventuellement, on aura plus besoin des prints dans les méthodes
     def print_status(self, pokemon):
