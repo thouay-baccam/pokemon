@@ -2,6 +2,7 @@ import pygame
 import os
 import sys
 from pokemonadd import PokemonAdd
+from pokedex import Pokedex
 from file_paths import (
     img_directory,
     backgrounds_directory,
@@ -64,6 +65,10 @@ class MainMenu:
         pokemonadd = PokemonAdd()
         pokemonadd.run()
 
+    def run_pokedex(self):
+        pokedex = Pokedex()
+        pokedex.run()        
+
     def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -100,7 +105,7 @@ class MainMenu:
         elif button_text == "NEW GAME":
             print("nouvelle partie")
         elif button_text == "POKEDEX":  # Handle Pokédex button click
-            print("pokedex")
+            self.run_pokedex()
         elif button_text == "ADD A POKEMON":  # Handle PokedexAdd button click
             self.run_pokemonadd()
         else:
