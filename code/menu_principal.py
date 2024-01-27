@@ -1,6 +1,8 @@
 import pygame
 import os
 import sys
+
+from code.new_game import NewGame
 from code.pokemonadd import PokemonAdd
 from code.pokedex import Pokedex
 from code.file_paths import (
@@ -103,7 +105,7 @@ class MainMenu:
             pygame.quit()
             sys.exit()
         elif button_text == "NEW GAME":
-            print("nouvelle partie")
+            NewGame()
         elif button_text == "POKEDEX":  # Handle Pokédex button click
             self.run_pokedex()
         elif button_text == "ADD A POKEMON":  # Handle PokedexAdd button click

@@ -122,15 +122,3 @@ class Combat:
             self.capture()
         else:
             print("The player's Pokemon has lost")
-
-Combat(
-    {
-        "name": "Test",
-        "types": (1, 2),
-        "attack_stat": 140,
-        "defense_stat": 120,
-        "level": 7,
-        "evolution": "New",
-        "evolution_level": 15
-    }
-)
