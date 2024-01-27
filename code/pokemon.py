@@ -4,26 +4,23 @@ from code.file_paths import pokemon_path, save_path
 
 
 class Pokemon:
-    def __init__(
-        self,
-        stat_dict
-    ):
+    def __init__(self, stat_dict):
         self.stat_dict = stat_dict
-        self.name = stat_dict['name']
+        self.name = stat_dict["name"]
 
-        self.types = stat_dict['types']
+        self.types = stat_dict["types"]
         self.health = 20
-        self.attack = stat_dict['attack_stat']
-        self.defense = stat_dict['defense_stat']
+        self.attack = stat_dict["attack_stat"]
+        self.defense = stat_dict["defense_stat"]
 
-        self.level = stat_dict['level']
+        self.level = stat_dict["level"]
 
         self.front_sprite = "ejaieazjieazijeiazj"
         self.back_sprite = "cxjwklcwxnkxwn"
 
         if ("evolution" and "evolution_level") in stat_dict:
-            self.evolution = stat_dict['evolution']
-            self.evolution_level = stat_dict['evolution_level']
+            self.evolution = stat_dict["evolution"]
+            self.evolution_level = stat_dict["evolution_level"]
 
     # Méthode pour changer de niveau
     def level_up(self):
@@ -72,6 +69,6 @@ class Pokemon:
             for pokemon in pokemons:
                 if pokemon["name"] == self.name:
                     pokemon = data
-                    pokemon['level'] = self.level
+                    pokemon["level"] = self.level
         with open(save_path, "w") as file:
             json.dump(pokemons, file, indent=4)

@@ -10,7 +10,7 @@ from code.file_paths import (
     font_directory,
     pkmnsprites_directory,
     pokemon_path,
-    select_sprites
+    select_sprites,
 )
 
 # Constants for the dimensions and positions
@@ -21,6 +21,7 @@ FONT_SIZE = 24
 BUTTON_SIZE = (300, 50)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+
 
 class PokemonAdd:
     def __init__(self):
@@ -36,38 +37,37 @@ class PokemonAdd:
         self.background = pygame.transform.scale(self.background, self.window_size)
 
         # Font for the input boxes and buttons
-        self.font = pygame.font.Font(os.path.join(font_directory, 'pkmn.ttf'), FONT_SIZE)
+        self.font = pygame.font.Font(
+            os.path.join(font_directory, "pkmn.ttf"), FONT_SIZE
+        )
 
         # Define the positions for input boxes and buttons
         self.name_box_pos = (self.window_size[0] * 0.3, self.window_size[1] * 0.2)
         self.type_box_pos = (self.window_size[0] * 0.3, self.window_size[1] * 0.3)
         self.atk_box_pos = (self.window_size[0] * 0.3, self.window_size[1] * 0.4)
         self.def_box_pos = (self.window_size[0] * 0.3, self.window_size[1] * 0.5)
-        self.select_sprite_button_pos = (self.window_size[0] * 0.3, self.window_size[1] * 0.6)
+        self.select_sprite_button_pos = (
+            self.window_size[0] * 0.3,
+            self.window_size[1] * 0.6,
+        )
         self.save_button_pos = (self.window_size[0] * 0.3, self.window_size[1] * 0.7)
 
         # Create input boxes
         self.input_boxes = {
-            'name': pygame.Rect(self.name_box_pos, (INPUT_BOX_WIDTH, INPUT_BOX_HEIGHT)),
-            'type': pygame.Rect(self.type_box_pos, (INPUT_BOX_WIDTH, INPUT_BOX_HEIGHT)),
-            'atk': pygame.Rect(self.atk_box_pos, (INPUT_BOX_WIDTH, INPUT_BOX_HEIGHT)),
-            'def': pygame.Rect(self.def_box_pos, (INPUT_BOX_WIDTH, INPUT_BOX_HEIGHT))
+            "name": pygame.Rect(self.name_box_pos, (INPUT_BOX_WIDTH, INPUT_BOX_HEIGHT)),
+            "type": pygame.Rect(self.type_box_pos, (INPUT_BOX_WIDTH, INPUT_BOX_HEIGHT)),
+            "atk": pygame.Rect(self.atk_box_pos, (INPUT_BOX_WIDTH, INPUT_BOX_HEIGHT)),
+            "def": pygame.Rect(self.def_box_pos, (INPUT_BOX_WIDTH, INPUT_BOX_HEIGHT)),
         }
 
         # Create buttons
         self.buttons = {
-            'select_sprite': pygame.Rect(self.select_sprite_button_pos, BUTTON_SIZE),
-            'save': pygame.Rect(self.save_button_pos, BUTTON_SIZE)
+            "select_sprite": pygame.Rect(self.select_sprite_button_pos, BUTTON_SIZE),
+            "save": pygame.Rect(self.save_button_pos, BUTTON_SIZE),
         }
 
         # Input data
-        self.input_data = {
-            'name': '',
-            'type': '',
-            'atk': '',
-            'def': '',
-            'sprite': None
-        }
+        self.input_data = {"name": "", "type": "", "atk": "", "def": "", "sprite": None}
 
         self.active_input = None
 
@@ -76,17 +76,17 @@ class PokemonAdd:
         pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(-1)
 
+        self.run()
+
     def render_labels(self):
-        labels = {
-            'name': 'NAME :',
-            'type': 'TYPE :',
-            'atk': 'ATK :',
-            'def': 'DEF :'
-        }
+        labels = {"name": "NAME :", "type": "TYPE :", "atk": "ATK :", "def": "DEF :"}
         for key, label in labels.items():
             label_surface = self.font.render(label, True, BLACK)
             label_rect = label_surface.get_rect()
-            label_rect.topleft = (self.input_boxes[key].x - label_surface.get_width() - 10, self.input_boxes[key].y)
+            label_rect.topleft = (
+                self.input_boxes[key].x - label_surface.get_width() - 10,
+                self.input_boxes[key].y,
+            )
             self.screen.blit(label_surface, label_rect)
 
     def handle_events(self):
@@ -108,25 +108,31 @@ class PokemonAdd:
             elif event.type == pygame.KEYDOWN:
                 if self.active_input:
                     if event.key == pygame.K_BACKSPACE:
-                        self.input_data[self.active_input] = self.input_data[self.active_input][:-1]
+                        self.input_data[self.active_input] = self.input_data[
+                            self.active_input
+                        ][:-1]
                     elif event.key == pygame.K_RETURN:
-                        self.active_input = None  # Deselect input box when enter is pressed
+                        self.active_input = (
+                            None  # Deselect input box when enter is pressed
+                        )
                     else:
-                        if self.active_input == 'name' and len(self.input_data['name']) >= MAX_NAME_LENGTH:
+                        if (
+                            self.active_input == "name"
+                            and len(self.input_data["name"]) >= MAX_NAME_LENGTH
+                        ):
                             # If the maximum length is reached, don't add more characters
                             continue
                         self.input_data[self.active_input] += event.unicode
 
         return True
 
-    
     def handle_click(self, position):
         # Check if any of the buttons were clicked
         for button_name, button_rect in self.buttons.items():
             if button_rect.collidepoint(position):
-                if button_name == 'select_sprite':
+                if button_name == "select_sprite":
                     self.select_sprite()
-                elif button_name == 'save':
+                elif button_name == "save":
                     self.save_pokemon()
                 break  # If a button was clicked, no need to check the others
 
@@ -134,9 +140,11 @@ class PokemonAdd:
     def select_sprite(self):
         # Open a file dialog to select a sprite
         Tk().withdraw()  # we don't want a full GUI, so keep the root window from appearing
-        sprite_path = filedialog.askopenfilename()  # show an "Open" dialog box and return the path to the selected file
+        sprite_path = (
+            filedialog.askopenfilename()
+        )  # show an "Open" dialog box and return the path to the selected file
         if sprite_path:
-            self.input_data['sprite'] = sprite_path 
+            self.input_data["sprite"] = sprite_path
 
     def save_pokemon(self):
         print("Attempting to save the pokemon...")  # Debug print
@@ -147,10 +155,12 @@ class PokemonAdd:
 
         # Move the sprite image to the pkmnsprites directory
         try:
-            if self.input_data['sprite']:
-                sprite_filename = os.path.basename(self.input_data['sprite'])
-                sprite_destination = os.path.join(pkmnsprites_directory, sprite_filename)
-                shutil.move(self.input_data['sprite'], sprite_destination)
+            if self.input_data["sprite"]:
+                sprite_filename = os.path.basename(self.input_data["sprite"])
+                sprite_destination = os.path.join(
+                    pkmnsprites_directory, sprite_filename
+                )
+                shutil.move(self.input_data["sprite"], sprite_destination)
                 print(f"Sprite moved to {sprite_destination}")
         except Exception as e:
             print(f"An error occurred while moving the sprite: {e}")
@@ -158,21 +168,21 @@ class PokemonAdd:
 
         # Save the data to pokemon.json
         try:
-            with open(pokemon_path, 'r') as file:
+            with open(pokemon_path, "r") as file:
                 pokemon_list = json.load(file)
-            
+
             new_pokemon = {
-                "name": self.input_data['name'],
-                "types": self.input_data['type'],
-                "attack_stat": int(self.input_data['atk']),
-                "defense_stat": int(self.input_data['def'])
+                "name": self.input_data["name"],
+                "types": self.input_data["type"],
+                "attack_stat": int(self.input_data["atk"]),
+                "defense_stat": int(self.input_data["def"]),
             }
 
             pokemon_list.append(new_pokemon)
 
-            with open(pokemon_path, 'w') as file:
+            with open(pokemon_path, "w") as file:
                 json.dump(pokemon_list, file, indent=4)
-            
+
             print("Pokemon saved successfully.")
         except Exception as e:
             print(f"An error occurred while saving the Pokemon: {e}")
@@ -203,17 +213,29 @@ class PokemonAdd:
 
             # Draw buttons
             for button_name, button_rect in self.buttons.items():
-                button_text = self.font.render(button_name.replace('_', ' ').title(), True, BLACK)
+                button_text = self.font.render(
+                    button_name.replace("_", " ").title(), True, BLACK
+                )
                 pygame.draw.rect(self.screen, WHITE, button_rect)
-                pygame.draw.rect(self.screen, BLACK, button_rect, 2)  # Border for the button
+                pygame.draw.rect(
+                    self.screen, BLACK, button_rect, 2
+                )  # Border for the button
                 # Center the text on the button
-                self.screen.blit(button_text, (button_rect.x + (button_rect.width - button_text.get_width()) // 2, 
-                                               button_rect.y + (button_rect.height - button_text.get_height()) // 2))
+                self.screen.blit(
+                    button_text,
+                    (
+                        button_rect.x
+                        + (button_rect.width - button_text.get_width()) // 2,
+                        button_rect.y
+                        + (button_rect.height - button_text.get_height()) // 2,
+                    ),
+                )
 
             pygame.display.flip()  # Update the full display Surface to the screen
             clock.tick(60)  # Cap the frame rate at 60 frames per second
 
         pygame.quit()
+
 
 if __name__ == "__main__":
     pokemon_add_app = PokemonAdd()
