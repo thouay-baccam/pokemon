@@ -1,7 +1,7 @@
 import pygame
 import json
 import os
-from file_paths import (
+from code.file_paths import (
     font_directory,
     backgrounds_directory,
     music_directory,

@@ -1,8 +1,8 @@
 import json
 from random import choice
 
-from file_paths import save_path, pokemon_path, pokedex_path
-from pokemon import Pokemon
+from code.file_paths import save_path, pokemon_path, pokedex_path
+from code.pokemon import Pokemon
 
 
 class Combat:

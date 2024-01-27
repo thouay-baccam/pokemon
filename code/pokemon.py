@@ -1,6 +1,6 @@
 import json
 
-from file_paths import pokemon_path, save_path
+from code.file_paths import pokemon_path, save_path
 
 
 class Pokemon:

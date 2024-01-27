@@ -1,14 +1,12 @@
 [
     {
-        "name": "Bulbasaur",
+        "name": "Articuno",
         "types": [
-            5,
-            8
+            6,
+            10
         ],
-        "attack_stat": 49,
-        "defense_stat": 49,
-        "evolution": "Ivysaur",
-        "evolution_level": 15,
-        "level": 6
+        "attack_stat": 85,
+        "defense_stat": 100,
+        "level": 7
     }
 ]

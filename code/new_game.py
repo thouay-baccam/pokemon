@@ -2,7 +2,7 @@ import os
 import pygame
 import json
 from os.path import exists
-from file_paths import (
+from code.file_paths import (
     pokedex_path,
     pokemon_path,
     save_path,
@@ -11,7 +11,7 @@ from file_paths import (
     font_directory,
     music_directory
 )
-from combat import Combat
+from code.combat import Combat
 
 class NewGame:
     def __init__(self):
