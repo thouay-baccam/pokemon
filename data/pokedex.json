@@ -1,120 +1,24 @@
 [
     {
-        "name": "Bulbasaur",
-        "types": [
-            5,
-            8
-        ],
-        "attack_stat": 49,
-        "defense_stat": 49,
-        "evolution": "Ivysaur",
-        "evolution_level": 15
-    },
-    {
-        "name": "Umbreon",
-        "types": [
-            16,
-            0
-        ],
-        "attack_stat": 65,
-        "defense_stat": 110
-    },
-    {
-        "name": "Alakazam",
-        "types": [
-            11,
-            0
-        ],
-        "attack_stat": 50,
-        "defense_stat": 45
-    },
-    {
-        "name": "Raichu",
+        "name": "Pikachu",
         "types": [
             4,
             0
         ],
-        "attack_stat": 90,
-        "defense_stat": 55
-    },
-    {
-        "name": "Graveler",
-        "types": [
-            13,
-            9
-        ],
-        "attack_stat": 95,
-        "defense_stat": 115
-    },
-    {
-        "name": "Dugtrio",
-        "types": [
-            9,
-            0
-        ],
-        "attack_stat": 100,
-        "defense_stat": 50
-    },
-    {
-        "name": "Caterpie",
-        "types": [
-            12,
-            0
-        ],
-        "attack_stat": 30,
-        "defense_stat": 35,
-        "evolution": "Metapod",
-        "evolution_level": 15
-    },
-    {
-        "name": "Charmander",
-        "types": [
-            2,
-            0
-        ],
-        "attack_stat": 52,
-        "defense_stat": 43,
-        "evolution": "Charmeleon",
-        "evolution_level": 15
-    },
-    {
-        "name": "Ivysaur",
-        "types": [
-            5,
-            8
-        ],
-        "attack_stat": 62,
-        "defense_stat": 63,
-        "evolution": "Venusaur",
+        "attack_stat": 55,
+        "defense_stat": 40,
+        "evolution": "Raichu",
         "evolution_level": 30
     },
     {
-        "name": "Ivysaur",
+        "name": "Machoke",
         "types": [
-            5,
-            8
+            7,
+            0
         ],
-        "attack_stat": 62,
-        "defense_stat": 63,
-        "evolution": "Venusaur",
-        "evolution_level": 30
-    },
-    {
-        "name": "Graveler",
-        "types": [
-            13,
-            9
-        ],
-        "attack_stat": 95,
-        "defense_stat": 115
-    },
-    {
-        "name": "Articuno",
-        "types": [
-            6,
-            10
-        ],
-        "attack_stat": 85,
-        "defense_stat": 100
+        "attack_stat": 80,
+        "defense_stat": 50,
+        "evolution": "Machamp",
+        "evolution_level": 15
     }
 ]

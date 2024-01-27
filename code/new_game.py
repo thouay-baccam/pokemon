@@ -37,7 +37,6 @@ class NewGame:
         pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(-1)
 
-
         self.buttons = {
             "PREVIOUS": pygame.Rect(220 - 10, 230 - 10, 120, 60),  
             "NEXT": pygame.Rect(480 - 10, 230 - 10, 120, 60),  
@@ -45,6 +44,9 @@ class NewGame:
             "YES": pygame.Rect(250 - 10, 300 - 10, 120, 60),  
             "NO": pygame.Rect(450 - 10, 300 - 10, 120, 60)  
         }
+
+        self.run()
+
 
     def load_data(self):
         with open(pokemon_path, "r") as file:
@@ -156,7 +158,3 @@ class NewGame:
             pygame.display.flip()
 
         pygame.quit()
-
-if __name__ == "__main__":
-    game = NewGame()
-    game.run()
