@@ -1,9 +1,9 @@
 import pygame
 import os
 import sys
-from pokemonadd import PokemonAdd
-from pokedex import Pokedex
-from file_paths import (
+from code.pokemonadd import PokemonAdd
+from code.pokedex import Pokedex
+from code.file_paths import (
     img_directory,
     backgrounds_directory,
     music_directory,
@@ -163,8 +163,3 @@ class MainMenu:
 
             pygame.display.flip()
             clock.tick(60)
-
-
-if __name__ == "__main__":
-    main_menu = MainMenu()
-    main_menu.run()
