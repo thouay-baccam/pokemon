@@ -9,9 +9,10 @@ from code.file_paths import (
     pkmnsprites_directory,
     backgrounds_directory,
     font_directory,
-    music_directory
+    music_directory,
 )
 from code.combat import Combat
+
 
 class NewGame:
     def __init__(self):
@@ -30,7 +31,9 @@ class NewGame:
         self.running = True
         self.show_popup = False
 
-        self.background = pygame.image.load(os.path.join(backgrounds_directory, "newgame.jpg"))
+        self.background = pygame.image.load(
+            os.path.join(backgrounds_directory, "newgame.jpg")
+        )
         self.background = pygame.transform.scale(self.background, (800, 600))
 
         pygame.mixer.music.load(os.path.join(music_directory, "newgamemusic.wav"))
@@ -38,27 +41,26 @@ class NewGame:
         pygame.mixer.music.play(-1)
 
         self.buttons = {
-            "PREVIOUS": pygame.Rect(220 - 10, 230 - 10, 120, 60),  
-            "NEXT": pygame.Rect(480 - 10, 230 - 10, 120, 60),  
-            "CONFIRM": pygame.Rect(350 - 10, 300 - 10, 120, 60),  
-            "YES": pygame.Rect(250 - 10, 300 - 10, 120, 60),  
-            "NO": pygame.Rect(450 - 10, 300 - 10, 120, 60)  
+            "PREVIOUS": pygame.Rect(220 - 10, 230 - 10, 120, 60),
+            "NEXT": pygame.Rect(480 - 10, 230 - 10, 120, 60),
+            "CONFIRM": pygame.Rect(350 - 10, 300 - 10, 120, 60),
+            "YES": pygame.Rect(250 - 10, 300 - 10, 120, 60),
+            "NO": pygame.Rect(450 - 10, 300 - 10, 120, 60),
         }
 
         self.run()
 
-
     def load_data(self):
         with open(pokemon_path, "r") as file:
             self.pokemons = json.load(file)
-        self.pokemon_names = [pokemon['name'] for pokemon in self.pokemons]
+        self.pokemon_names = [pokemon["name"] for pokemon in self.pokemons]
 
     def load_sprites(self):
         self.pokemon_sprites = {}
         for pokemon in self.pokemons:
             sprite_path = os.path.join(pkmnsprites_directory, f"{pokemon['name']}.png")
             if os.path.exists(sprite_path):
-                self.pokemon_sprites[pokemon['name']] = pygame.image.load(sprite_path)
+                self.pokemon_sprites[pokemon["name"]] = pygame.image.load(sprite_path)
 
     def draw_pokemon_sprites(self):
         sprite = self.pokemon_sprites.get(self.pokemon_names[self.current_selection])
@@ -66,12 +68,14 @@ class NewGame:
             sprite_width = sprite.get_width()
             sprite_height = sprite.get_height()
             x_position = (self.screen.get_width() - sprite_width) // 2
-            y_position = (self.screen.get_height() - sprite_height) // 2 - 100  
+            y_position = (self.screen.get_height() - sprite_height) // 2 - 100
             self.screen.blit(sprite, (x_position, y_position))
-            name_text = self.font.render(self.pokemon_names[self.current_selection], True, (0, 0, 0))
+            name_text = self.font.render(
+                self.pokemon_names[self.current_selection], True, (0, 0, 0)
+            )
             name_text_width = name_text.get_width()
             name_x_position = (self.screen.get_width() - name_text_width) // 2
-            name_y_position = y_position + sprite_height + 10  
+            name_y_position = y_position + sprite_height + 10
             self.screen.blit(name_text, (name_x_position, name_y_position))
 
     def draw_popup(self):
@@ -111,7 +115,7 @@ class NewGame:
         new_save = [self.pokemons[pokemon_index]]
         with open(pokedex_path, "w") as file:
             json.dump(new_save, file, indent=4)
-        new_save[0]["level"] = 5  
+        new_save[0]["level"] = 5
         with open(save_path, "w") as file:
             json.dump(new_save, file, indent=4)
 
@@ -124,21 +128,25 @@ class NewGame:
         return exists(save_path) and os.path.getsize(save_path) > 0
 
     def run(self):
-        title_text = self.font.render("CHOOSE YOUR POKEMON !", True, (0, 0, 0))  
-        title_rect = title_text.get_rect(center=(self.screen.get_width() // 2, 100))  
+        title_text = self.font.render("CHOOSE YOUR POKEMON !", True, (0, 0, 0))
+        title_rect = title_text.get_rect(center=(self.screen.get_width() // 2, 100))
 
         while self.running:
             self.screen.blit(self.background, (0, 0))
-            self.screen.blit(title_text, title_rect)  
+            self.screen.blit(title_text, title_rect)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     clicked_button = self.handle_button_click(event.pos)
                     if clicked_button == "PREVIOUS":
-                        self.current_selection = (self.current_selection - 1) % len(self.pokemon_names)
+                        self.current_selection = (self.current_selection - 1) % len(
+                            self.pokemon_names
+                        )
                     elif clicked_button == "NEXT":
-                        self.current_selection = (self.current_selection + 1) % len(self.pokemon_names)
+                        self.current_selection = (self.current_selection + 1) % len(
+                            self.pokemon_names
+                        )
                     elif clicked_button == "CONFIRM":
                         if self.is_save_file_non_empty():
                             self.show_popup = True

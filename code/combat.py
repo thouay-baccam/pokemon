@@ -55,7 +55,7 @@ class Combat:
                 pokedex.append(enemy_pokemon)
             with open(pokedex_path, "w") as file:
                 json.dump(pokedex, file, indent=4)
-            enemy_pokemon['level'] = self.player_pokemon.level
+            enemy_pokemon["level"] = self.player_pokemon.level
         return Pokemon(enemy_pokemon)
 
     # Eventuellement, on aura plus besoin des prints dans les méthodes

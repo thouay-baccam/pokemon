@@ -63,14 +63,6 @@ class MainMenu:
             {"text": "QUIT THE GAME", "position": (self.window_size[0] // 2, 450)},
         ]
 
-    def run_pokemonadd(self):
-        pokemonadd = PokemonAdd()
-        pokemonadd.run()
-
-    def run_pokedex(self):
-        pokedex = Pokedex()
-        pokedex.run()        
-
     def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -101,15 +93,14 @@ class MainMenu:
                     self.button_clicked(self.buttons[self.selected_button]["text"])
 
     def button_clicked(self, button_text):
-        if button_text == "QUIT THE GAME":
-            pygame.quit()
-            sys.exit()
-        elif button_text == "NEW GAME":
-            NewGame()
-        elif button_text == "POKEDEX":  # Handle Pokédex button click
-            self.run_pokedex()
-        elif button_text == "ADD A POKEMON":  # Handle PokedexAdd button click
-            self.run_pokemonadd()
+        buttons = {
+            "QUIT THE GAME": self.quit,
+            "NEW GAME": NewGame,
+            "POKEDEX": Pokedex,
+            "ADD A POKEMON": PokemonAdd,
+        }
+        if button_text in buttons:
+            buttons[button_text]()
         else:
             print(f"CE BOUTON NE MARCHE PAS ENCORE: {button_text}")
 
@@ -165,3 +156,7 @@ class MainMenu:
 
             pygame.display.flip()
             clock.tick(60)
+
+    def quit(self):
+        pygame.quit()
+        sys.exit()
