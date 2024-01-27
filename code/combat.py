@@ -96,6 +96,13 @@ class Combat:
         }
         print(messages[multiplier])
 
+    def capture(self):
+        with open(save_path, "r") as file:
+            pokemons = json.load(file)
+            pokemons.append(self.enemy_pokemon.stat_dict)
+            with open(save_path, "w") as file:
+                json.dump(pokemons, file, indent=4)
+
     def battle(self):
         while self.player_pokemon.health > 0 and self.enemy_pokemon.health > 0:
             self.print_status(self.player_pokemon)
@@ -112,5 +119,18 @@ class Combat:
         if self.enemy_pokemon.health <= 0:
             print("The player's Pokemon has won")
             self.player_pokemon.level_up()
+            self.capture()
         else:
             print("The player's Pokemon has lost")
+
+Combat(
+    {
+        "name": "Test",
+        "types": (1, 2),
+        "attack_stat": 140,
+        "defense_stat": 120,
+        "level": 7,
+        "evolution": "New",
+        "evolution_level": 15
+    }
+)

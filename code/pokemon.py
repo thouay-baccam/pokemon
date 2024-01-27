@@ -8,6 +8,7 @@ class Pokemon:
         self,
         stat_dict
     ):
+        self.stat_dict = stat_dict
         self.name = stat_dict['name']
 
         self.types = stat_dict['types']
