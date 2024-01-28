@@ -15,7 +15,7 @@ from code.file_paths import (
 
 class Combat:
     def __init__(self, player_pokemon_name):
-                # `fmt` permet de dire à "black" (programme qui gère le format du code)
+        # `fmt` permet de dire à "black" (programme qui gère le format du code)
         # de ne pas toucher au tuple
         # fmt: off
 
@@ -242,6 +242,7 @@ class Combat:
             if self.enemy_pokemon.health <= 0:
                 self.battle_state = 'END'
                 self.current_message = "The player's Pokemon has won!"
+                self.player_pokemon.level_up()
             else:
                 self.battle_state = 'ENEMY_TURN'
         elif self.battle_state == 'ENEMY_TURN':
