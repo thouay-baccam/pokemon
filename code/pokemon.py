@@ -1,26 +1,43 @@
 import json
 
-from code.file_paths import pokemon_path, save_path
+from code.file_paths import pokemon_path, save_path, select_sprites, pkmnsprites_directory
 
 
 class Pokemon:
     def __init__(self, stat_dict):
         self.stat_dict = stat_dict
         self.name = stat_dict["name"]
-
         self.types = stat_dict["types"]
-        self.health = 20
+        self.health = 50
+        self.max_health = stat_dict.get("max_health", self.health) 
         self.attack = stat_dict["attack_stat"]
         self.defense = stat_dict["defense_stat"]
-
-        self.level = stat_dict["level"]
-
-        self.front_sprite = "ejaieazjieazijeiazj"
-        self.back_sprite = "cxjwklcwxnkxwn"
+        self.level = stat_dict.get("level", 5)
+        self.front_sprite = select_sprites(f"{self.name.lower()}.png")
+        self.back_sprite = select_sprites(f"{self.name.lower()}-back.png")
 
         if ("evolution" and "evolution_level") in stat_dict:
             self.evolution = stat_dict["evolution"]
             self.evolution_level = stat_dict["evolution_level"]
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'level': self.level,
+            'health': self.health,
+            'max_health': self.max_health,
+            'attack': self.attack,
+            'defense': self.defense,
+            'types': self.types,
+            # Add any other relevant attributes
+        }
+
+    def set_sprite_paths(self):
+        # Construct file paths for front and back sprites
+        front_sprite_path = f"{pkmnsprites_directory}/{self.name.lower()}.png"
+        back_sprite_path = f"{pkmnsprites_directory}/{self.name.lower()}-back.png"
+
+        return front_sprite_path, back_sprite_path
 
     # Méthode pour changer de niveau
     def level_up(self):

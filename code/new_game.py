@@ -96,7 +96,7 @@ class NewGame:
         for button_text, button_rect in self.buttons.items():
             if self.show_popup and button_text in ["YES", "NO"]:
                 pygame.draw.rect(self.screen, (180, 180, 180), button_rect)
-                text_surf = self.font.render(button_text, True, (0, 0, 0))
+                text_surf = self.button_font.render(button_text, True, (0, 0, 0))
                 text_rect = text_surf.get_rect(center=button_rect.center)
                 self.screen.blit(text_surf, text_rect)
             elif not self.show_popup and button_text in ["PREVIOUS", "NEXT", "CONFIRM"]:
@@ -115,14 +115,14 @@ class NewGame:
         new_save = [self.pokemons[pokemon_index]]
         with open(pokedex_path, "w") as file:
             json.dump(new_save, file, indent=4)
-        new_save[0]["level"] = 5
         with open(save_path, "w") as file:
             json.dump(new_save, file, indent=4)
 
     def start_combat(self):
         with open(save_path, "r") as file:
             pokemons = json.load(file)
-        Combat(pokemons[0])
+        combat_instance = Combat(pokemons[0]['name'])
+        combat_instance.run()
 
     def is_save_file_non_empty(self):
         return exists(save_path) and os.path.getsize(save_path) > 0
@@ -166,3 +166,6 @@ class NewGame:
             pygame.display.flip()
 
         pygame.quit()
+
+if __name__ == "__main__":
+    NewGame()
