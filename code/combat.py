@@ -44,37 +44,40 @@ class Combat:
         )
         # fmt: on
         pygame.init()
+        # Sets up the game window with a specific size and title.
         self.screen = pygame.display.set_mode((800, 600))
         pygame.display.set_caption("Combat - Pokemon La Plateforme")
 
         self.clock = pygame.time.Clock()  # To control the frame rate
 
-        # Load the custom font
+        # Loads the custom font
         self.custom_font_path = os.path.join(font_directory, "pkmn.ttf")
         self.font = pygame.font.Font(self.custom_font_path, 15)
 
-        # Load the background image
+        # Loads and scales the background image for the battle scene.
         self.background = pygame.image.load(
             os.path.join(backgrounds_directory, "battlebg.png")
         )
         self.background = pygame.transform.scale(self.background, (800, 600))
 
-        # Load the music
+        # Loads and plays the background music for the battle scene.
         pygame.mixer.music.load(os.path.join(music_directory, "battle.wav"))
         pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(-1)
 
-        # Game state initialization
+        # Initializes game state variables
         self.is_running = True
         self.current_message = "A wild Pokémon appears!"
         self.player_pokemon = self.load_pokemon(player_pokemon_name)
         self.enemy_pokemon = self.load_random_pokemon()
         self.battle_state = 'START'
 
+        # Defines rectangles for message and action boxes in the battle screen.
         self.message_box_rect = pygame.Rect(100, 500, 580, 90) 
         self.action_box_rect = pygame.Rect(600, 500, 190, 90) 
 
     def load_pokemon(self, pokemon_name):
+        # Loads a specific Pokémon by name from the Pokémon data file.
         with open(pokemon_path, "r") as file:
             pokemons = json.load(file)
             for pokemon in pokemons:
@@ -84,6 +87,7 @@ class Combat:
 
 
     def load_random_pokemon(self):
+        # Loads a random Pokémon from the Pokémon data file for the enemy.
         with open(pokemon_path, "r") as file:
             pokemons = json.load(file)
             for pokemon in pokemons:
@@ -120,47 +124,41 @@ class Combat:
         self.render_action_box(650, 480)
         
     def render_pokemon_sprites(self):
-        # Load the player and enemy Pokemon sprites
+        # Renders the player's and enemy's Pokémon sprites on the battle screen.
+        # Loads the sprites, scale them, and position them appropriately.
         player_pokemon_sprite = pygame.image.load(self.player_pokemon.back_sprite).convert_alpha()
         enemy_pokemon_sprite = pygame.image.load(self.enemy_pokemon.front_sprite).convert_alpha()
 
-        # Define the desired sprite size (could be a fixed size or a proportion of the screen size)
-        desired_player_sprite_size = (200, 200)  # Example fixed size
-        desired_enemy_sprite_size = (200, 200)  # Example fixed size
+        desired_player_sprite_size = (200, 200)
+        desired_enemy_sprite_size = (200, 200)
 
-        # Calculate the scale ratios    
         player_scale_ratio = (desired_player_sprite_size[0] / player_pokemon_sprite.get_width(),
                             desired_player_sprite_size[1] / player_pokemon_sprite.get_height())
         enemy_scale_ratio = (desired_enemy_sprite_size[0] / enemy_pokemon_sprite.get_width(),
                             desired_enemy_sprite_size[1] / enemy_pokemon_sprite.get_height())
 
-        # Scale the sprites
         player_pokemon_sprite = pygame.transform.scale(player_pokemon_sprite, desired_player_sprite_size)
         enemy_pokemon_sprite = pygame.transform.scale(enemy_pokemon_sprite, desired_enemy_sprite_size)
 
-        # Define anchor points for positioning the sprites
-        player_sprite_anchor = (90, 447 - desired_player_sprite_size[1])  # Bottom-left corner of the player sprite
-        enemy_sprite_anchor = (500, 70)  # Top-right corner of the enemy sprite
+        player_sprite_anchor = (90, 447 - desired_player_sprite_size[1])
+        enemy_sprite_anchor = (500, 70)
 
-        # Blit the sprites onto the screen at their respective positions
         self.screen.blit(player_pokemon_sprite, player_sprite_anchor)
         self.screen.blit(enemy_pokemon_sprite, enemy_sprite_anchor)
 
     def render_message_box(self):
-        # Split the current message into lines
+        # Renders the message box on the battle screen to display game messages.
         lines = self.current_message.split('\n')
-        
-        # Starting Y position for the first line
         start_y = self.message_box_rect.y + 10
         
         # Render each line
         for i, line in enumerate(lines):
             message_surface = self.font.render(line, True, (0, 0, 0))
-            # Adjust the Y position for each line
-            line_y = start_y + (i * 20)  # Assumes 20 pixels height per line of text
+            line_y = start_y + (i * 20)
             self.screen.blit(message_surface, (self.message_box_rect.x + 10, line_y))
 
     def render_enemy_info(self):
+        # Renders the enemy Pokémon's name, health bar, and level on the screen.
         enemy_health_percent = self.get_health_percent(self.enemy_pokemon)
         enemy_name = self.enemy_pokemon.name
         enemy_level_text = f"Lvl {self.enemy_pokemon.level}"
@@ -177,6 +175,7 @@ class Combat:
         self.screen.blit(enemy_level_surface, (enemy_level_x, enemy_level_y))
 
     def render_player_info(self):
+        # Render the player's Pokémon's name, health bar, and level on the screen.
         player_health_percent = self.get_health_percent(self.player_pokemon)
         player_name = self.player_pokemon.name
         player_level_text = f"Lvl {self.player_pokemon.level}"
@@ -193,11 +192,11 @@ class Combat:
         self.screen.blit(player_level_surface, (player_level_x, player_level_y))
 
     def create_health_bar_surface(self, health_percent, color):
+        # Creates a surface for the health bar and fill it based on the Pokémon's health percentage.
         bar_width = 95
         bar_height = 6
         fill_width = int(bar_width * health_percent)
 
-        # Create a surface to draw the health bar on
         health_bar_surface = pygame.Surface((bar_width, bar_height))
         health_bar_surface.fill((0, 0, 0))
         health_bar_surface.fill(color, (0, 0, fill_width, bar_height))
@@ -205,11 +204,12 @@ class Combat:
         return health_bar_surface
 
     def get_health_percent(self, pokemon):
-        # Calculate health percentage
+        # Calculates the health percentage of a Pokémon based on its current health.
         health = min(pokemon.health, pokemon.max_health)
         return health / pokemon.max_health
 
     def render_action_box(self, pos_x, pos_y):
+        # Renders the action box on the screen, which is used to proceed to the next action in the battle.
         action_text = "Next Action"
 
         action_surface = self.font.render(action_text, True, (0, 0, 0))
@@ -221,7 +221,6 @@ class Combat:
         action_y = pos_y - (text_height // 2) - padding
         action_width = text_width + 2 * padding
         action_height = text_height + 2 * padding
-
         action_rect = pygame.Rect(action_x, action_y, action_width, action_height)
 
         pygame.draw.rect(self.screen, (0, 255, 0), action_rect) 
@@ -229,15 +228,14 @@ class Combat:
         text_x = action_x + padding
         text_y = action_y + padding
         self.screen.blit(action_surface, (text_x, text_y))
-
         self.action_box_rect = action_rect
 
-
     def handle_action_click(self):
+        # Handles clicks on the action box, updating the game state based on the current phase of the battle.
         if self.battle_state == 'START':
             self.battle_state = 'PLAYER_TURN'
         elif self.battle_state == 'PLAYER_TURN':
-            # Perform player's attack
+            # Performs player's attack
             self.perform_attack(self.player_pokemon, self.enemy_pokemon)
             if self.enemy_pokemon.health <= 0:
                 self.battle_state = 'END'
@@ -246,7 +244,7 @@ class Combat:
             else:
                 self.battle_state = 'ENEMY_TURN'
         elif self.battle_state == 'ENEMY_TURN':
-            # Perform enemy's attack
+            # Performs enemy's attack
             self.perform_attack(self.enemy_pokemon, self.player_pokemon)
             if self.player_pokemon.health <= 0:
                 self.battle_state = 'END'
@@ -259,43 +257,42 @@ class Combat:
         pass
 
     def calculate_type_multiplier(self, attacker, defender):
-        # Calculate multipliers based on the attacker's and defender's types
+         # Calculates the damage multiplier based on the types of the attacking and defending Pokémon.
         multipliers = [self.type_chart[attacker_type][defender_type]
                     for attacker_type in attacker.types
                     for defender_type in defender.types]
         return max(multipliers)
 
     def perform_attack(self, attacker, defender):
-        # Check for hit or miss
+        # Perform an attack from one Pokémon to another, calculating damage, chance to miss and updating health.
         hit_chance = choice(range(0, 4))
         if hit_chance == 0:
             self.update_message_for_attack(attacker, defender, 0, missed=True)
             return
-
-        # Calculate damage
+        
         multiplier = self.calculate_type_multiplier(attacker, defender)
         damage = int((attacker.attack / defender.defense) * multiplier * 10)
         defender.health -= max(damage, 1)  # Ensure minimum damage of 1
 
-        # Update battle message
         self.update_message_for_attack(attacker, defender, multiplier)
 
     def calculate_damage(self, attacker, defender):
+        # Where the calculations happen
         multipliers = []
         for attacker_type in attacker.types:
             for defender_type in defender.types:
                 multipliers.append(self.type_chart[attacker_type][defender_type])
         multiplier = max(multipliers)
 
-        # Example damage formula
         damage = (attacker.attack / defender.defense) * multiplier * 10
         return max(int(damage), 1)  # Ensure minimum damage of 1
 
     def get_effectiveness(self, attacker, defender):
         #Placeholder
-        return 1  # Replace with actual effectiveness calculation
+        return 1 
 
     def update_message_for_attack(self, attacker, defender, effectiveness, missed=False):
+        # Updates the battle message based on the outcome of an attack.
         if missed:
             self.current_message = f"{attacker.name}'s attack missed!\n"
         else:
@@ -309,5 +306,5 @@ class Combat:
                 self.current_message += "\nIt's not very effective."
             elif effectiveness == 0:
                 self.current_message += "\nIt had no effect!"
-        # Add a new line for the next part of the message
+        # Add a new line for the next part of the message (so the thing isn't on the same line as the attack msg)
         self.current_message += "\n"
