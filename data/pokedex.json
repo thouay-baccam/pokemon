@@ -11,12 +11,14 @@
         "evolution_level": 15
     },
     {
-        "name": "Golem",
+        "name": "Dragonair",
         "types": [
-            13,
-            9
+            15,
+            0
         ],
-        "attack_stat": 120,
-        "defense_stat": 130
+        "attack_stat": 84,
+        "defense_stat": 65,
+        "evolution": "Dragonite",
+        "evolution_level": 30
     }
 ]
