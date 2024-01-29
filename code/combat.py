@@ -1,3 +1,4 @@
+# LIGNE 51 POUR MODIFIER TAILLE FONT
 import os # REDUNDANT
 import json
 from random import choice
