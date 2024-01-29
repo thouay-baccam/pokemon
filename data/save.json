@@ -12,13 +12,13 @@
         "level": 6
     },
     {
-        "name": "Raticate",
+        "name": "Golem",
         "types": [
-            1,
-            0
+            13,
+            9
         ],
-        "attack_stat": 81,
-        "defense_stat": 60,
+        "attack_stat": 120,
+        "defense_stat": 130,
         "level": 5
     }
 ]
