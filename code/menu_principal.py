@@ -5,6 +5,7 @@ import sys
 from code.new_game import NewGame
 from code.pokemonadd import PokemonAdd
 from code.pokedex import Pokedex
+from code.resume import ResumeGame
 from code.file_paths import (
     img_directory,
     backgrounds_directory,
@@ -54,7 +55,7 @@ class MainMenu:
         # Boutons du menu
         self.buttons = [
             {"text": "NEW GAME", "position": (self.window_size[0] // 2, 300)},
-            {"text": "CONTINUE ", "position": (self.window_size[0] // 2, 330)},
+            {"text": "CONTINUE", "position": (self.window_size[0] // 2, 330)},
             {
                 "text": "POKEDEX",
                 "position": (self.window_size[0] // 2, 370),
@@ -98,6 +99,7 @@ class MainMenu:
             "NEW GAME": NewGame,
             "POKEDEX": Pokedex,
             "ADD A POKEMON": PokemonAdd,
+            "CONTINUE": ResumeGame
         }
         if button_text in buttons:
             buttons[button_text]()
