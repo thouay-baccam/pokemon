@@ -4,7 +4,7 @@ from random import choice
 
 import pygame
 
-from code.file_paths import save_path, pokemon_path, pokedex_path, font_directory
+from code.file_paths import save_path, pokemon_path, pokedex_path, font_directory, backgrounds_directory, music_directory, pkmnsprites_directory
 from code.pokemon import Pokemon
 
 
@@ -42,8 +42,16 @@ class Combat:
 
         pygame.init()
         self.screen = pygame.display.set_mode((800, 600))
+        self.background = pygame.image.load(
+            os.path.join(backgrounds_directory, "battlebg.png")
+        )
+        self.background = pygame.transform.scale(self.background, (800, 600))
         self.custom_font_path = os.path.join(font_directory, "pkmn.ttf")
         self.font = pygame.font.Font(self.custom_font_path, 16)
+
+        pygame.mixer.music.load(os.path.join(music_directory, "battle.wav"))
+        pygame.mixer.music.set_volume(0.5)
+        pygame.mixer.music.play(-1)
 
         self.key_pressed = False
 
@@ -123,47 +131,51 @@ class Combat:
         while True:
             self.handle_input()
 
-            self.screen.fill((0, 0, 0))
+            self.screen.blit(self.background, (0, 0))
 
             player_pokemon_name_surface = self.font.render(
                 self.player_pokemon.name,
                 True,
-                (255, 255, 255)
+                (0, 0 ,0)
             )
-            self.screen.blit(player_pokemon_name_surface, (16, 384))
+            self.screen.blit(player_pokemon_name_surface, (605, 334))
+            player_pokemon_health_bar_width = 96 * (self.player_pokemon.health / 20)  # Adjust length based on health
+            player_pokemon_health_bar_height = 6  # Change this value to adjust thickness
             player_pokemon_health_bar = pygame.draw.rect(
                 self.screen,
                 (0, 255, 0),
-                (16, 400, 200*(self.player_pokemon.health/20), 8)
+                (633, 362, player_pokemon_health_bar_width, player_pokemon_health_bar_height)
             )
             player_pokemon_level_surface = self.font.render(
                 f"LVL {self.player_pokemon.level}",
                 True,
-                (255, 255, 255)
+                (0, 0 ,0)
             )
-            self.screen.blit(player_pokemon_level_surface, (16, 408))
+            self.screen.blit(player_pokemon_level_surface, (635, 374))
 
             enemy_pokemon_name_surface = self.font.render(
                 self.enemy_pokemon.name,
                 True,
-                (255, 255, 255)
+                (0, 0 ,0)
             )
-            self.screen.blit(enemy_pokemon_name_surface, (584, 184))
+            self.screen.blit(enemy_pokemon_name_surface, (99, 59))
+            enemy_pokemon_health_bar_width = 96 * (self.enemy_pokemon.health / 20)  # Adjust length based on health
+            enemy_pokemon_health_bar_height = 6  # Change this value to adjust thickness
             enemy_pokemon_health_bar = pygame.draw.rect(
-                self.screen,
-                (0, 255, 0),
-                (584, 200, 200*(self.enemy_pokemon.health/20), 8)
-            )
+            self.screen,
+            (0, 255, 0),
+            (128, 84, enemy_pokemon_health_bar_width, enemy_pokemon_health_bar_height)
+        )
             enemy_pokemon_level_surface = self.font.render(
                 f"LVL {self.enemy_pokemon.level}",
                 True,
-                (255, 255, 255)
+                (0, 0 ,0)
             )
-            self.screen.blit(enemy_pokemon_level_surface, (584, 208))
+            self.screen.blit(enemy_pokemon_level_surface, (99, 95))
 
             for i, line in enumerate(message.split("\n")):
-                line_surface = self.font.render(f"{line}", True, (255, 255, 255))
-                self.screen.blit(line_surface, (16, 16*i+536))
+                line_surface = self.font.render(f"{line}", True, (0, 0 ,0))
+                self.screen.blit(line_surface, (40, 16*i+486))
 
             pygame.display.flip()
 

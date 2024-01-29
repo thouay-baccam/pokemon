@@ -11,14 +11,23 @@
         "evolution_level": 15
     },
     {
-        "name": "Charmander",
+        "name": "Raticate",
         "types": [
-            2,
+            1,
             0
         ],
-        "attack_stat": 52,
-        "defense_stat": 43,
-        "evolution": "Charmeleon",
-        "evolution_level": 15
+        "attack_stat": 81,
+        "defense_stat": 60
+    },
+    {
+        "name": "Metapod",
+        "types": [
+            12,
+            0
+        ],
+        "attack_stat": 20,
+        "defense_stat": 55,
+        "evolution": "Butterfree",
+        "evolution_level": 30
     }
 ]
