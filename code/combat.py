@@ -1,7 +1,10 @@
+import os # REDUNDANT
 import json
 from random import choice
 
-from code.file_paths import save_path, pokemon_path, pokedex_path
+import pygame
+
+from code.file_paths import save_path, pokemon_path, pokedex_path, font_directory
 from code.pokemon import Pokemon
 
 
@@ -37,8 +40,17 @@ class Combat:
         )
         # fmt: on
 
+        pygame.init()
+        self.screen = pygame.display.set_mode((800, 600))
+        self.custom_font_path = os.path.join(font_directory, "pkmn.ttf")
+        self.font = pygame.font.Font(self.custom_font_path, 16)
+
+        self.key_pressed = False
+
         self.player_pokemon = Pokemon(player_pokemon)
         self.enemy_pokemon = self.random_pokemon()
+
+        self.fighting = True
         self.battle()
 
     # Méthode pour choisir un pokemon adversaire aléatoirement
@@ -57,17 +69,6 @@ class Combat:
                 json.dump(pokedex, file, indent=4)
             enemy_pokemon["level"] = self.player_pokemon.level
         return Pokemon(enemy_pokemon)
-
-    # Eventuellement, on aura plus besoin des prints dans les méthodes
-    def print_status(self, pokemon):
-        print(
-            f"NAME: {pokemon.name}\n"
-            f"HP: {pokemon.health}\n"
-            f"TYPES: {pokemon.types}\n"
-            f"ATK: {pokemon.attack}\n"
-            f"DEF: {pokemon.defense}\n"
-            f"LVL: {pokemon.level}\n"
-        )
 
     def attack(self, attacker, target):
         multipliers = []
@@ -94,7 +95,7 @@ class Combat:
             0.5: f"{attack_message}It's not very effective...\n{damage} DMG\n",
             0: f"{attack_message}It missed!\n{damage} DMG\n",
         }
-        print(messages[multiplier])
+        return (messages[multiplier])
 
     def capture(self):
         with open(save_path, "r") as file:
@@ -103,22 +104,125 @@ class Combat:
             with open(save_path, "w") as file:
                 json.dump(pokemons, file, indent=4)
 
+    def handle_input(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+
+            if event.type != pygame.KEYDOWN:
+                continue
+
+            if event.key == pygame.K_RETURN:
+                self.key_pressed = True
+
+    def turn(self, attacker, defender, fighting=True, message=None):
+        if fighting:
+            attack_message = self.attack(attacker, defender)
+        if message is None:
+            message = attack_message
+        while True:
+            self.handle_input()
+
+            self.screen.fill((0, 0, 0))
+
+            player_pokemon_name_surface = self.font.render(
+                self.player_pokemon.name,
+                True,
+                (255, 255, 255)
+            )
+            self.screen.blit(player_pokemon_name_surface, (16, 384))
+            player_pokemon_health_bar = pygame.draw.rect(
+                self.screen,
+                (0, 255, 0),
+                (16, 400, 200*(self.player_pokemon.health/20), 8)
+            )
+            player_pokemon_level_surface = self.font.render(
+                f"LVL {self.player_pokemon.level}",
+                True,
+                (255, 255, 255)
+            )
+            self.screen.blit(player_pokemon_level_surface, (16, 408))
+
+            enemy_pokemon_name_surface = self.font.render(
+                self.enemy_pokemon.name,
+                True,
+                (255, 255, 255)
+            )
+            self.screen.blit(enemy_pokemon_name_surface, (584, 184))
+            enemy_pokemon_health_bar = pygame.draw.rect(
+                self.screen,
+                (0, 255, 0),
+                (584, 200, 200*(self.enemy_pokemon.health/20), 8)
+            )
+            enemy_pokemon_level_surface = self.font.render(
+                f"LVL {self.enemy_pokemon.level}",
+                True,
+                (255, 255, 255)
+            )
+            self.screen.blit(enemy_pokemon_level_surface, (584, 208))
+
+            for i, line in enumerate(message.split("\n")):
+                line_surface = self.font.render(f"{line}", True, (255, 255, 255))
+                self.screen.blit(line_surface, (16, 16*i+536))
+
+            pygame.display.flip()
+
+            if self.key_pressed:
+                break
+        self.key_pressed = False
+             
+
     def battle(self):
-        while self.player_pokemon.health > 0 and self.enemy_pokemon.health > 0:
-            self.print_status(self.player_pokemon)
-            self.print_status(self.enemy_pokemon)
-            self.attack(self.player_pokemon, self.enemy_pokemon)
-
-            self.print_status(self.player_pokemon)
-            self.print_status(self.enemy_pokemon)
-            self.attack(self.enemy_pokemon, self.player_pokemon)
-
-        self.print_status(self.player_pokemon)
-        self.print_status(self.enemy_pokemon)
+        self.turn(
+            self.player_pokemon,
+            self.enemy_pokemon,
+            False,
+            f"A wild {self.enemy_pokemon.name} appears!"
+        )
+        while self.fighting:
+            self.turn(self.player_pokemon, self.enemy_pokemon)
+            if self.enemy_pokemon.health <= 0:
+                self.fighting = False
+                break
+            self.turn(self.enemy_pokemon, self.player_pokemon)
+            if self.player_pokemon.health <= 0:
+                self.fighting = False
+                break
 
         if self.enemy_pokemon.health <= 0:
-            print("The player's Pokemon has won")
+            self.turn(
+                self.player_pokemon,
+                self.enemy_pokemon,
+                True,
+                "The player's Pokemon has won"
+            )
             self.player_pokemon.level_up()
+            self.turn(
+                self.player_pokemon,
+                self.enemy_pokemon,
+                True,
+                f"{self.player_pokemon.name} has leveled up!\n"
+                f"It is now level {self.player_pokemon.level}!"
+            )
+            if self.player_pokemon.check_evolution():
+                self.turn(
+                    self.player_pokemon,
+                    self.enemy_pokemon,
+                    True,
+                    f"{self.player_pokemon.name} is evolving..."
+                )
+                self.player_pokemon.evolve()
+                self.turn(
+                    self.player_pokemon,
+                    self.enemy_pokemon,
+                    True,
+                    f"...into {self.player_pokemon.evolution}!"
+                )
             self.capture()
         else:
-            print("The player's Pokemon has lost")
+            self.turn(
+                self.player_pokemon,
+                self.enemy_pokemon,
+                True,
+                "The player's Pokemon has lost"
+            )

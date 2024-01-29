@@ -1,24 +1,24 @@
 [
     {
-        "name": "Pikachu",
+        "name": "Bulbasaur",
         "types": [
-            4,
-            0
+            5,
+            8
         ],
-        "attack_stat": 55,
-        "defense_stat": 40,
-        "evolution": "Raichu",
-        "evolution_level": 30
+        "attack_stat": 49,
+        "defense_stat": 49,
+        "evolution": "Ivysaur",
+        "evolution_level": 15
     },
     {
-        "name": "Machoke",
+        "name": "Charmander",
         "types": [
-            7,
+            2,
             0
         ],
-        "attack_stat": 80,
-        "defense_stat": 50,
-        "evolution": "Machamp",
+        "attack_stat": 52,
+        "defense_stat": 43,
+        "evolution": "Charmeleon",
         "evolution_level": 15
     }
 ]
