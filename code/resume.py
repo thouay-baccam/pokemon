@@ -101,6 +101,7 @@ class ResumeGame:
                         elif clicked_button == "NEXT":
                             self.current_selection = (self.current_selection + 1) % len(self.pokemon_names)
                         elif clicked_button == "CONFIRM":
+                            self.running = False
                             self.start_combat(self.current_selection)
                     elif event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_ESCAPE:
