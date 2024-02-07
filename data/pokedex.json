@@ -1,90 +1,14 @@
 [
     {
-        "name": "Bulbasaur",
+        "name": "Charmander",
         "types": [
-            5,
-            8
+            2,
+            0
         ],
-        "attack_stat": 49,
-        "defense_stat": 49,
-        "evolution": "Ivysaur",
+        "attack_stat": 52,
+        "defense_stat": 43,
+        "evolution": "Charmeleon",
         "evolution_level": 15
-    },
-    {
-        "name": "Raticate",
-        "types": [
-            1,
-            0
-        ],
-        "attack_stat": 81,
-        "defense_stat": 60
-    },
-    {
-        "name": "Kadabra",
-        "types": [
-            11,
-            0
-        ],
-        "attack_stat": 35,
-        "defense_stat": 30,
-        "evolution": "Alakazam",
-        "evolution_level": 15
-    },
-    {
-        "name": "Ekans",
-        "types": [
-            8,
-            0
-        ],
-        "attack_stat": 60,
-        "defense_stat": 44,
-        "evolution": "Arbok",
-        "evolution_level": 15
-    },
-    {
-        "name": "Golem",
-        "types": [
-            13,
-            9
-        ],
-        "attack_stat": 120,
-        "defense_stat": 130
-    },
-    {
-        "name": "Dragonite",
-        "types": [
-            15,
-            10
-        ],
-        "attack_stat": 134,
-        "defense_stat": 95
-    },
-    {
-        "name": "Raticate",
-        "types": [
-            1,
-            0
-        ],
-        "attack_stat": 81,
-        "defense_stat": 60
-    },
-    {
-        "name": "Venusaur",
-        "types": [
-            5,
-            8
-        ],
-        "attack_stat": 82,
-        "defense_stat": 83
-    },
-    {
-        "name": "Arbok",
-        "types": [
-            8,
-            0
-        ],
-        "attack_stat": 85,
-        "defense_stat": 69
     },
     {
         "name": "Fearow",
@@ -94,5 +18,16 @@
         ],
         "attack_stat": 90,
         "defense_stat": 65
+    },
+    {
+        "name": "Abra",
+        "types": [
+            11,
+            0
+        ],
+        "attack_stat": 20,
+        "defense_stat": 15,
+        "evolution": "Kadabra",
+        "evolution_level": 15
     }
 ]

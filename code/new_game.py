@@ -115,7 +115,7 @@ class NewGame:
         new_save = [self.pokemons[pokemon_index]]
         with open(pokedex_path, "w") as file:
             json.dump(new_save, file, indent=4)
-        new_save[0]["level"] = 14 # Pour montrer évolution
+        new_save[0]["level"] = 5 # Pour montrer évolution
         with open(save_path, "w") as file:
             json.dump(new_save, file, indent=4)
 
