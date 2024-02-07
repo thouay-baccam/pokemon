@@ -76,6 +76,7 @@ class PokemonAdd:
         pygame.mixer.music.set_volume(0.5)
         pygame.mixer.music.play(-1)
 
+        self.running = True
         self.run()
 
     def render_labels(self):
@@ -123,6 +124,8 @@ class PokemonAdd:
                             # If the maximum length is reached, don't add more characters
                             continue
                         self.input_data[self.active_input] += event.unicode
+                if event.key == pygame.K_ESCAPE:
+                    self.running = False
 
         return True
 
@@ -188,11 +191,10 @@ class PokemonAdd:
             print(f"An error occurred while saving the Pokemon: {e}")
 
     def run(self):
-        running = True
         clock = pygame.time.Clock()
 
-        while running:
-            running = self.handle_events()
+        while self.running:
+            self.handle_events()
 
             # Clear the screen and draw the background
             self.screen.blit(self.background, (0, 0))
@@ -233,8 +235,6 @@ class PokemonAdd:
 
             pygame.display.flip()  # Update the full display Surface to the screen
             clock.tick(60)  # Cap the frame rate at 60 frames per second
-
-        pygame.quit()
 
 
 if __name__ == "__main__":

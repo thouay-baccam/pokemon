@@ -102,6 +102,9 @@ class ResumeGame:
                             self.current_selection = (self.current_selection + 1) % len(self.pokemon_names)
                         elif clicked_button == "CONFIRM":
                             self.start_combat(self.current_selection)
+                    elif event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_ESCAPE:
+                            self.running = False
 
                 self.screen.blit(self.background, (0, 0))
                 self.screen.blit(title_text, title_rect)
@@ -111,5 +114,3 @@ class ResumeGame:
         except Exception as e:
             print(f"Error in ResumeGame run method: {e}")
             self.running = False
-
-        pygame.quit()
