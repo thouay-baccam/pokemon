@@ -152,17 +152,20 @@ class NewGame:
                             self.show_popup = True
                         else:
                             self.create_save(self.current_selection)
+                            self.running = False
                             self.start_combat()
                     elif clicked_button == "YES":
                         self.show_popup = False
                         self.create_save(self.current_selection)
+                        self.running = False
                         self.start_combat()
                     elif clicked_button == "NO":
                         self.show_popup = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        self.running = False
 
             self.draw_pokemon_sprites()
             self.draw_buttons()
             self.draw_popup()
             pygame.display.flip()
-
-        pygame.quit()

@@ -11,14 +11,12 @@
         "evolution_level": 15
     },
     {
-        "name": "Dragonair",
+        "name": "Raticate",
         "types": [
-            15,
+            1,
             0
         ],
-        "attack_stat": 84,
-        "defense_stat": 65,
-        "evolution": "Dragonite",
-        "evolution_level": 30
+        "attack_stat": 81,
+        "defense_stat": 60
     }
 ]

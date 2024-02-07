@@ -9,6 +9,16 @@
         "defense_stat": 49,
         "evolution": "Ivysaur",
         "evolution_level": 15,
+        "level": 6
+    },
+    {
+        "name": "Raticate",
+        "types": [
+            1,
+            0
+        ],
+        "attack_stat": 81,
+        "defense_stat": 60,
         "level": 5
     }
 ]
